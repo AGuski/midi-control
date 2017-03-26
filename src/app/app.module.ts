@@ -22,7 +22,10 @@ import { ToolbarComponent } from 'app/components/toolbar/toolbar.component';
 import { StatusBarComponent } from 'app/components/status-bar/status-bar.component';
 import { MessageIndicatorComponent } from 'app/components/message-indicator/message-indicator.component';
 import { RouteSelectorComponent } from 'app/components/route-selector/route-selector.component';
+
+/* editor module components */
 import { InputModuleComponent } from 'app/components/input-module/input-module.component';
+import { OutputModuleComponent } from 'app/components/output-module/output-module.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,8 @@ import { InputModuleComponent } from 'app/components/input-module/input-module.c
     StatusBarComponent,
     MessageIndicatorComponent,
     RouteSelectorComponent,
-    InputModuleComponent
+    InputModuleComponent,
+    OutputModuleComponent
   ],
   imports: [
     BrowserModule,

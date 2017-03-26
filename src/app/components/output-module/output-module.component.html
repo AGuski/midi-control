@@ -1,0 +1,27 @@
+<md-card fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="15px">
+  <form>
+    <md-select
+      placeholder="OUTPUT PORT"
+      name="port"
+      (change)="selectPort($event)"
+    >
+      <md-option *ngFor="let port of ports"
+        [value]="port.id"
+      >{{port.name}}
+      </md-option>
+      <md-option>- none -</md-option>
+    </md-select>
+  </form>
+
+  <app-message-indicator
+    [trigger]="indicatorTrigger"
+   >
+    <i class="material-icons indicator-icon">settings_input_svideo</i>
+  </app-message-indicator>
+
+  <app-route-selector
+    [isInput]="true"
+    [selectedRoute]=""
+    (selectedRouteChange)="onRouteSelection($event)"
+  ></app-route-selector>
+</md-card>
