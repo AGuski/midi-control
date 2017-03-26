@@ -26,6 +26,8 @@ import { RouteSelectorComponent } from 'app/components/route-selector/route-sele
 /* editor module components */
 import { InputModuleComponent } from 'app/components/input-module/input-module.component';
 import { OutputModuleComponent } from 'app/components/output-module/output-module.component';
+import { ModuleComponent } from 'app/components/module/module.component';
+import { NetworkModuleComponent } from 'app/components/network-module/network-module.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { OutputModuleComponent } from 'app/components/output-module/output-modul
     MessageIndicatorComponent,
     RouteSelectorComponent,
     InputModuleComponent,
-    OutputModuleComponent
+    OutputModuleComponent,
+    ModuleComponent,
+    NetworkModuleComponent
   ],
   imports: [
     BrowserModule,

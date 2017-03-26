@@ -1,0 +1,19 @@
+<md-card fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="15px">
+  <md-card-subtitle>NETWORK</md-card-subtitle>
+  <div fxLayout="row" fxLayoutGap="15px">
+    <md-checkbox (change)="setSender($event)">Send</md-checkbox>
+    <md-checkbox (change)="setReceiver($event)">Receive</md-checkbox>
+  </div>
+
+  <app-route-selector
+    [isInput]="true"
+    [selectedRoute]=""
+    (selectedRouteChange)="onRouteInSelection($event)"
+  ></app-route-selector>
+
+  <app-route-selector
+    [isInput]="false"
+    [selectedRoute]=""
+    (selectedRouteChange)="onRouteOutSelection($event)"
+  ></app-route-selector>
+</md-card>
