@@ -1,0 +1,8 @@
+<md-toolbar fxLayout="row" fxLayoutAlign="end center">
+  <button md-icon-button (click)="toggleSettings()">
+    <md-icon 
+      class="toolbar-icon" 
+      [ngClass]="{'active': openSettings}"
+    >settings</md-icon>
+  </button>
+</md-toolbar>

@@ -1,3 +1,63 @@
 .main-window {
   height: 100%;
 }
+
+md-sidenav-container {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+
+  > .mat-sidenav-backdrop.mat-sidenav-shown {
+    display: none;
+  }
+
+  > .mat-sidenav.mat-sidenav-opened:not(.mat-sidenav-side), .mat-sidenav.mat-sidenav-opening:not(.mat-sidenav-side) {
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+  }
+}
+
+.app-sidenav {
+  width: 300px;
+  margin-bottom: 10px;
+  border-bottom-left-radius: 3px;
+}
+
+.editor-container {
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+}
+
+.editor {
+  min-height: 100%;
+}
+
+.input-area, .control-area, .output-area {
+  position: relative;
+  padding: 5px;
+  width: 100%;
+  min-height: 100px;
+
+  > * {
+    margin: 5px;
+  }
+}
+
+.input-area, .output-area {
+  background-color: rgba(34, 34, 34, 0.20);
+  
+}
+
+.area-label {
+  position: absolute;
+  top: 72px;
+  right: 20px;
+
+  .control {
+    color: rgba(34, 34, 34, 0.20);
+  }
+
+  .inputs, .outputs {
+    color: #333;
+  }
+}

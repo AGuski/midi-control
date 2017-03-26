@@ -1,3 +1,45 @@
 <div class="main-window" fxLayout="column" fxLayoutAlign="space-between center">
+  <app-toolbar
+    (openSettingsChange)="sidenav.toggle()"
+  ></app-toolbar>
+
+  <md-sidenav-container fxLayout="column">
+
+    <md-sidenav #sidenav class="app-sidenav" mode="over" align="end"> <!-- Make Sidenav a component and transclude primary content (then only disable encapsulation for sidenav-component) -->
+      <!-- sidenav content -->
+      <div></div>
+    </md-sidenav>
+
+    <!-- primary content -->
+    <div class="editor-container">
+      <div class="editor" fxLayout="column" fxLayoutAlign="space-between center">
+        <div
+          class="input-area"
+          fxLayout="row"
+          fxLayoutWrap
+        ><div class="area-label"><label class="inputs">INPUTS</label></div>
+          
+        </div>
+
+        <div
+          class="control-area"
+          fxLayout="row"
+          fxLayoutAlign="start start"
+          fxLayoutWrap
+        ><div class="area-label"><label class="control">CONTROL</label></div>
+          
+        </div>
+
+        <div
+          class="output-area"
+          fxLayout="row"
+          fxLayoutWrap
+        ><div class="area-label"><label class="outputs">OUTPUTS</label></div>
+          
+        </div>
+      </div>
+    </div>
+
+  </md-sidenav-container>
   <app-status-bar></app-status-bar>
 </div>

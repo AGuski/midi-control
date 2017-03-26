@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 import { MidiConnectionService } from 'app/services/midi-connection/midi-connection.service';
 import { RoutingService } from 'app/services/routing/routing.service';
@@ -6,7 +6,8 @@ import { RoutingService } from 'app/services/routing/routing.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  encapsulation: ViewEncapsulation.None // <-- Needed to override sidenav backdrop, but probably not an awesome idea....
 })
 export class AppComponent {
   
