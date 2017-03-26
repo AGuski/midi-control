@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* global variables*/
+
+$bg-color: #333;
+$primary-color: #ffa726;
+
+
+/* global style */
+
+body {
+  font-family: sans-serif;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  
+  background-color: $bg-color;
+}
