@@ -10,7 +10,7 @@ import { RoutingService } from 'app/services/routing/routing.service';
   encapsulation: ViewEncapsulation.None // <-- Needed to override sidenav backdrop, but probably not an awesome idea....
 })
 export class AppComponent {
-  
+
   constructor(
     private connectionService: MidiConnectionService,
     private routingService: RoutingService

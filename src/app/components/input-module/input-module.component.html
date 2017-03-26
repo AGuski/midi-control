@@ -1,0 +1,43 @@
+<md-card class="module-card"
+  fxLayout="row" 
+  fxLayoutAlign="start center" 
+  fxLayoutGap="15px"
+>
+  <app-message-indicator
+    [trigger]="indicatorTrigger"
+  >
+    <i class="material-icons indicator-icon">settings_input_svideo</i>
+  </app-message-indicator>
+
+  <md-select class="port-select"
+    placeholder="INPUT PORT"
+    name="port"
+    (change)="selectPort($event)"
+  >
+    <md-option *ngFor="let port of ports"
+      [value]="port.id"
+    >{{port.name}}
+    </md-option>
+    <md-option>- none -</md-option>
+  </md-select>
+
+  <md-select class="map-select"
+    placeholder="DEVICE MAP"
+    name="mapping"
+    (change)="selectMapping($event)"
+  >
+    <md-option *ngFor="let mapping of mappings"
+      [value]="mapping.id"
+    >{{mapping.name}}
+    </md-option>
+    <md-option>- none -</md-option>
+  </md-select>
+
+  <app-route-selector
+    [isInput]="false"
+    [selectedRoute]=""
+    (selectedRouteChange)="onRouteSelection($event)"
+  ></app-route-selector>
+
+
+</md-card>

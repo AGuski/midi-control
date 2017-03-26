@@ -1,0 +1,19 @@
+<div class="route-selector" [ngClass]="{'route-selector--left': isInput}">
+  <div 
+    class="route-selector--indicator"
+    [ngStyle]="{'background-color': selectedRoute}"
+    (click)="showAvailableRoutes=!showAvailableRoutes"
+    mdTooltip="{{toolTip}}" [mdTooltipShowDelay]="1000"
+  ></div>
+  <ul 
+    class="route-selector--dropdown"
+    *ngIf="showAvailableRoutes"
+  >
+    <li
+      class="route-item"
+      *ngFor="let route of routes"
+      [ngStyle]="{'background-color': route}"
+      (click)="selectRoute(route)"
+    ></li>
+  </ul>
+</div>

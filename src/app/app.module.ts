@@ -21,13 +21,17 @@ import { AppComponent } from './app.component';
 import { ToolbarComponent } from 'app/components/toolbar/toolbar.component';
 import { StatusBarComponent } from 'app/components/status-bar/status-bar.component';
 import { MessageIndicatorComponent } from 'app/components/message-indicator/message-indicator.component';
+import { RouteSelectorComponent } from 'app/components/route-selector/route-selector.component';
+import { InputModuleComponent } from 'app/components/input-module/input-module.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ToolbarComponent,
     StatusBarComponent,
-    MessageIndicatorComponent
+    MessageIndicatorComponent,
+    RouteSelectorComponent,
+    InputModuleComponent
   ],
   imports: [
     BrowserModule,
