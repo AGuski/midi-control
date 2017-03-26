@@ -1,0 +1,30 @@
+<div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="3px">
+
+  <!-- Candidates for statusbar:
+  sysex: on/off
+
+  server running (<- start/stop server button)
+  input via websockets/netzwerk (app-message-indicator -> N )
+
+  -->
+  <div fxLayout="row" fxLayoutGap="15px">
+    <i class="material-icons panic-button">report_problem</i>
+    <!--<app-server-setup></app-server-setup>-->
+  </div>
+  
+  <div>
+    <label>Ports IN: {{inputPorts}} / OUT: {{outputPorts}}</label>
+  </div>
+
+  <div fxLayout="row" fxLayoutGap="3px">
+    <label>MIDI:</label>
+    <app-message-indicator
+      [trigger]="inputIndicatorTrigger"
+    >I</app-message-indicator>
+    <app-message-indicator
+      [trigger]="outputIndicatorTrigger"
+    >O</app-message-indicator>
+  </div>
+
+</div>
+

@@ -18,10 +18,14 @@ import { MidiConnectionService } from 'app/services/midi-connection/midi-connect
 import { RoutingService } from 'app/services/routing/routing.service';
 
 import { AppComponent } from './app.component';
+import { StatusBarComponent } from 'app/components/status-bar/status-bar.component';
+import { MessageIndicatorComponent } from 'app/components/message-indicator/message-indicator.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    StatusBarComponent,
+    MessageIndicatorComponent
   ],
   imports: [
     BrowserModule,

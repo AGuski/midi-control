@@ -1,0 +1,18 @@
+@import '~variables.scss';
+
+.message-indicator {
+  width: 15px;
+  height: 15px;
+  line-height: 15px;
+  text-align: center;
+  background-color: $bg-color;
+  color: #888;
+  font-weight: 700;
+  border-radius: 100px;
+  font-size: 10px;
+  cursor: default;
+
+  &.active {
+    background-color: #adff2f;
+  }
+}
