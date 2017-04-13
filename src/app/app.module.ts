@@ -16,9 +16,12 @@ import { NgxElectronModule } from 'ngx-electron';
 import { LocalStorageService } from 'app/services/local-storage/local-storage.service';
 import { MidiConnectionService } from 'app/services/midi-connection/midi-connection.service';
 import { RoutingService } from 'app/services/routing/routing.service';
+import { NetworkService } from 'app/services/network/network.service';
 
 import { AppComponent } from './app.component';
 import { ToolbarComponent } from 'app/components/toolbar/toolbar.component';
+import { SideMenuComponent } from 'app/components/side-menu/side-menu.component';
+import { ServerSetupComponent } from 'app/components/server-setup/server-setup.component';
 import { StatusBarComponent } from 'app/components/status-bar/status-bar.component';
 import { MessageIndicatorComponent } from 'app/components/message-indicator/message-indicator.component';
 import { RouteSelectorComponent } from 'app/components/route-selector/route-selector.component';
@@ -33,13 +36,16 @@ import { NetworkModuleComponent } from 'app/components/network-module/network-mo
   declarations: [
     AppComponent,
     ToolbarComponent,
+    SideMenuComponent,
     StatusBarComponent,
+    ServerSetupComponent,
     MessageIndicatorComponent,
     RouteSelectorComponent,
     InputModuleComponent,
     OutputModuleComponent,
     ModuleComponent,
-    NetworkModuleComponent
+    NetworkModuleComponent,
+    SideMenuComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +60,8 @@ import { NetworkModuleComponent } from 'app/components/network-module/network-mo
   providers: [
     LocalStorageService,
     MidiConnectionService,
-    RoutingService
+    RoutingService,
+    NetworkService
   ],
   bootstrap: [AppComponent]
 })

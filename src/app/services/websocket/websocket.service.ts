@@ -21,7 +21,7 @@ export class WebsocketService {
 
     console.log(localStorage.getItem('serverAddress'));
 
-    let ws = new WebSocket(`ws://${address}`); //<-- nur dahoam!?
+    let ws = new WebSocket(`ws://${address}`);
     
     // create the observable
     let observable = Observable.create((obs: Observer<MessageEvent>) => {

@@ -1,0 +1,29 @@
+<md-sidenav-container fxLayout="column">
+
+  <md-sidenav #sidenav class="app-sidenav" mode="over" align="end"> <!-- Make Sidenav a component and transclude primary content (then only disable encapsulation for sidenav-component) -->
+    <!-- sidenav content -->
+    <md-list>
+      <h3 md-subheader>Network Settings</h3>
+      <md-list-item>
+        <md-input-container class="">
+          <input mdInput #serverAddressInput maxlength="20" 
+            placeholder="Server Address" 
+            [(ngModel)]="serverAddress" 
+            (change)="clientChangeServerAddress(serverAddress)">
+          <md-hint align="end">{{serverAddressInput.value.length}} / 20</md-hint>
+        </md-input-container>
+      </md-list-item>
+      <!--<md-divider></md-divider>
+      <h3 md-subheader>Other Settings</h3>
+      <md-list-item>
+          <md-icon md-list-icon>note</md-icon>
+          <h4 md-line>other blub</h4>
+          <p md-line class="demo-2"> adasdasasasdasd</p>
+      </md-list-item>-->
+    </md-list>
+
+  </md-sidenav>
+
+  <ng-content></ng-content>
+
+</md-sidenav-container>

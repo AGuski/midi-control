@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, ChangeDetectorRef } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ChangeDetectorRef, ComponentRef } from '@angular/core';
 
 @Component({
   selector: 'app-message-indicator',
@@ -7,24 +7,16 @@ import { Component, EventEmitter, Input, Output, ChangeDetectorRef } from '@angu
 })
 export class MessageIndicatorComponent {
 
-  ////////////////// USE ASYNC PIPE!!!!!!!!!!!!!!!!!! //////////////////
-
-  @Input() trigger: boolean;
-
-  signal: boolean;
+  private active: boolean;
 
   constructor(private cd: ChangeDetectorRef ) { }
 
-  ngOnChanges($event) {
-    if($event.trigger.isFirstChange()) {
-      return;
-    }
-    
-    this.signal = true;
+  trigger() {
+    this.active = true;
     setTimeout(() => {
-      this.signal = false;
+      this.active = false;
       this.cd.detectChanges();
     }, 100);
-  }
+  };
 }
 

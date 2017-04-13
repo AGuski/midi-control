@@ -56,7 +56,7 @@ export class NetworkModuleComponent extends ModuleComponent implements OnInit {
   }
 
   onIncoming(data) {
-    this.toRouteOut(data); //<-- send-thru default?
+    this.toRouteOut(data); //<-- send-thru default? (better: add bypass button to modules)
     if (this.isSender) {
       this.wsMessages$.next(data);
     }

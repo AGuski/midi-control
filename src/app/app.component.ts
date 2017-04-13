@@ -6,8 +6,7 @@ import { RoutingService } from 'app/services/routing/routing.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  encapsulation: ViewEncapsulation.None // <-- Needed to override sidenav backdrop, but probably not an awesome idea....
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
 

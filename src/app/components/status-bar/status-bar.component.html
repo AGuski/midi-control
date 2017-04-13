@@ -9,7 +9,10 @@
   -->
   <div fxLayout="row" fxLayoutGap="15px">
     <i class="material-icons panic-button">report_problem</i>
-    <!--<app-server-setup></app-server-setup>-->
+
+    <!-- rethink placement of server setup in settings aside VS status bar -->
+    <app-server-setup></app-server-setup>
+
   </div>
   
   <div>
@@ -18,12 +21,8 @@
 
   <div fxLayout="row" fxLayoutGap="3px">
     <label>MIDI:</label>
-    <app-message-indicator
-      [trigger]="inputIndicatorTrigger"
-    >I</app-message-indicator>
-    <app-message-indicator
-      [trigger]="outputIndicatorTrigger"
-    >O</app-message-indicator>
+    <app-message-indicator #inputIndicator>I</app-message-indicator>
+    <app-message-indicator #outputIndicator>O</app-message-indicator>
   </div>
 
 </div>

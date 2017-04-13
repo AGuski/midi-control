@@ -1,10 +1,12 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { MidiConnectionService } from '../../services/midi-connection/midi-connection.service';
+import { MessageIndicatorComponent } from 'app/components/message-indicator/message-indicator.component';
 
 /**
  * Status bar
  * Investigate ChangeDetectorRef usability
  */
+
 
 @Component({
   selector: 'app-status-bar',
@@ -13,11 +15,11 @@ import { MidiConnectionService } from '../../services/midi-connection/midi-conne
 })
 export class StatusBarComponent implements OnInit {
 
+  @ViewChild('inputIndicator') inputIndicator: MessageIndicatorComponent;
+  @ViewChild('outputIndicator') outputIndicator: MessageIndicatorComponent;
+
   inputPorts: number;
   outputPorts: number;
-
-  inputIndicatorTrigger = false;
-  outputIndicatorTrigger = false;
 
   constructor(
     private midiConnectionService: MidiConnectionService,
@@ -25,7 +27,7 @@ export class StatusBarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // subscriptions 
+    // subscriptions
 
     // TODO: make ports themselves subscribeable and filter to get the data, then -> async pipe?
     this.midiConnectionService.ports$.subscribe( ports => {
@@ -35,12 +37,12 @@ export class StatusBarComponent implements OnInit {
     });
 
     this.midiConnectionService.inputMessages$.subscribe ( message => {
-      this.inputIndicatorTrigger = !this.inputIndicatorTrigger;
+      this.inputIndicator.trigger();
       this.cd.detectChanges();
     });
 
     this.midiConnectionService.outputMessages$.subscribe ( message => {
-      this.outputIndicatorTrigger = !this.outputIndicatorTrigger;
+      this.outputIndicator.trigger();
       this.cd.detectChanges();
     });
   }

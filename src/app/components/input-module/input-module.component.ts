@@ -1,9 +1,11 @@
-import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef, ViewChild } from '@angular/core';
 
 import { MidiConnectionService } from 'app/services/midi-connection/midi-connection.service';
 import { MidiPortService } from 'app/services/midi-port/midi-port.service';
 import { MidiPort } from 'app/services/midi-port/midi-port.class';
 import { RoutingService } from 'app/services/routing/routing.service';
+
+import { MessageIndicatorComponent } from 'app/components/message-indicator/message-indicator.component';
 
 @Component({
   selector: 'app-input-module',
@@ -12,6 +14,8 @@ import { RoutingService } from 'app/services/routing/routing.service';
   providers: [MidiPortService]
 })
 export class InputModuleComponent implements OnInit {
+
+  @ViewChild('inputIndicator') inputIndicator: MessageIndicatorComponent;
 
   ports: WebMidi.MIDIPort[];
   mappings = [ 
@@ -22,8 +26,6 @@ export class InputModuleComponent implements OnInit {
   selectedInput: MidiPort;
 
   portSubscription;
-
-  indicatorTrigger = false;
 
   routeOut$;
 
@@ -74,7 +76,7 @@ export class InputModuleComponent implements OnInit {
   }
 
   private onPortInput(data: number[]) {
-    this.indicatorTrigger = !this.indicatorTrigger;
+    this.inputIndicator.trigger();
     this.toRouteOut(data);
   }
 

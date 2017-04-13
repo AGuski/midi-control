@@ -1,48 +1,41 @@
 <div class="main-window" fxLayout="column" fxLayoutAlign="space-between center">
   <app-toolbar
-    (openSettingsChange)="sidenav.toggle()"
+    (openSettingsChange)="sidemenu.toggle()"
   ></app-toolbar>
 
-  <md-sidenav-container fxLayout="column">
+  <app-side-menu #sidemenu class="editor-container">
+    <!-- editor content -->
+    <div class="editor" fxLayout="column" fxLayoutAlign="space-between center">
+      <div
+        class="input-area"
+        fxLayout="row"
+        fxLayoutWrap
+      ><div class="area-label"><label class="inputs">INPUTS</label></div>
+        <app-input-module></app-input-module>
+        <app-input-module></app-input-module>
+      </div>
 
-    <md-sidenav #sidenav class="app-sidenav" mode="over" align="end"> <!-- Make Sidenav a component and transclude primary content (then only disable encapsulation for sidenav-component) -->
-      <!-- sidenav content -->
-      <div></div>
-    </md-sidenav>
+      <div
+        class="control-area"
+        fxLayout="row"
+        fxLayoutAlign="start start"
+        fxLayoutWrap
+      ><div class="area-label"><label class="control">CONTROL</label></div>
+        <app-network-module></app-network-module>
+        <app-network-module></app-network-module>
+      </div>
 
-    <!-- primary content -->
-    <div class="editor-container">
-      <div class="editor" fxLayout="column" fxLayoutAlign="space-between center">
-        <div
-          class="input-area"
-          fxLayout="row"
-          fxLayoutWrap
-        ><div class="area-label"><label class="inputs">INPUTS</label></div>
-          <app-input-module></app-input-module>
-          <app-input-module></app-input-module>
-        </div>
-
-        <div
-          class="control-area"
-          fxLayout="row"
-          fxLayoutAlign="start start"
-          fxLayoutWrap
-        ><div class="area-label"><label class="control">CONTROL</label></div>
-          <app-network-module></app-network-module>
-          <app-network-module></app-network-module>
-        </div>
-
-        <div
-          class="output-area"
-          fxLayout="row"
-          fxLayoutWrap
-        ><div class="area-label"><label class="outputs">OUTPUTS</label></div>
-          <app-output-module></app-output-module>
-          <app-output-module></app-output-module>
-        </div>
+      <div
+        class="output-area"
+        fxLayout="row"
+        fxLayoutWrap
+      ><div class="area-label"><label class="outputs">OUTPUTS</label></div>
+        <app-output-module></app-output-module>
+        <app-output-module></app-output-module>
       </div>
     </div>
+  </app-side-menu>
 
-  </md-sidenav-container>
+  
   <app-status-bar></app-status-bar>
 </div>
