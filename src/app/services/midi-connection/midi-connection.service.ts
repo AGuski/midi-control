@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject, BehaviorSubject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs/Rx';
 
 import { MidiConnection } from './midi-connection';
 import { MidiMessage } from './midi-message.class';
@@ -14,9 +14,9 @@ const BLACKLIST = [
  * communicate via Web MIDI API with connected MIDI devices. It will be used once
  * to establish connection with all devices.
  * Then, all created Input outputs use its methods to communicate with the midi-connection.
- * 
+ *
  * Think about usage of RxJS subject/observables and discuss in BA.
- * 
+ *
  */
 
 @Injectable()
@@ -39,7 +39,7 @@ export class MidiConnectionService {
       outputPorts: []
     });
   }
-  
+
   /**
    * Creates a new midiConnection with the User Agents WebMIDI interface.
    * Returns a promise containing the midiConnection.
@@ -50,22 +50,22 @@ export class MidiConnectionService {
       this.midiConnection.connect().then(() => {
         this.emitPorts();
 
-        // On MIDI Input message --> needs to receive ALL inputs 
+        // On MIDI Input message --> needs to receive ALL inputs
         // for global stuff (logging or ui indicator on input);
         this.midiConnection.onMessage = $event => {
           // Unfiltered Input handling goes here...
 
-          if (this.messageFilter($event.data, BLACKLIST)){
+          if (this.messageFilter($event.data, BLACKLIST)) {
             this.inputMessages$.next($event);
           }
-        }
+        };
 
         this.midiConnection.onStateChange = $event => {
           this.emitPorts();
-        }        
+        };
 
         resolve(this.midiConnection);
-      }).catch( error => {
+      }).catch(error => {
         // alert error here for now, but maybe pass it thru for other uses.
         // reject(error);
         alert(error);
@@ -125,22 +125,21 @@ export class MidiConnectionService {
           shallPass = true;
         }
       });
-    })
+    });
     return shallPass;
   }
 
   /**
-   * Connect output to input and input to MIDI-thru of an output device. 
+   * Connect output to input and input to MIDI-thru of an output device.
    * Useful for comparison of devices and API latency.
    */
-  pingDevice():void {
-    let delta = window.performance.now();
+  pingDevice(): void {
+    const delta = window.performance.now();
     console.log('executing ping...');
-    this.send({message: [0x90, 66, 0x7f]});
+    this.send({ message: [0x90, 66, 0x7f] });
 
     this.inputMessages$.subscribe(() => {
-      console.log('ping took ', window.performance.now()-delta, ' milliseconds.');
+      console.log('ping took ', window.performance.now() - delta, ' milliseconds.');
     });
   }
-
 }

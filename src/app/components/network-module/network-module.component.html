@@ -1,5 +1,15 @@
 <md-card fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="15px">
   <md-card-subtitle>NETWORK</md-card-subtitle>
+
+  <!-- server address input if client -->
+  <md-input-container>
+    <input mdInput #serverAddressInput maxlength="20" 
+      placeholder="Server Address" 
+      [(ngModel)]="serverAddress" 
+      (change)="clientChangeServerAddress(serverAddress)">
+    <md-hint align="end">{{serverAddressInput.value.length}} / 20</md-hint>
+  </md-input-container>
+
   <div fxLayout="row" fxLayoutGap="15px">
     <md-checkbox (change)="setSender($event)">Send</md-checkbox>
     <md-checkbox (change)="setReceiver($event)">Receive</md-checkbox>

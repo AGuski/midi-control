@@ -17,11 +17,8 @@ export class ModuleComponent implements OnInit {
 
   constructor(routingService: RoutingService) { this.routingService = routingService; }
 
-  ngOnInit() {
-    // this.setInputRoute(this.routeInId);
-    // this.setOutputRoute(this.routeOutId);
-  }
-  
+  ngOnInit() { }
+
   setInputRoute(routeId) {
     if (this.routeInSubscription) {
       this.routeInSubscription.unsubscribe();
@@ -41,7 +38,7 @@ export class ModuleComponent implements OnInit {
       this.routeOut$.next(message);
     }
   }
-  
+
   onIncoming(message) {
     this.toRouteOut(message);
   }

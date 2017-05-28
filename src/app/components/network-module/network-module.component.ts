@@ -1,8 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Subject } from 'rxjs/Rx';
 
 import { WebsocketService } from "app/services/websocket/websocket.service";
+import { SettingsService } from '../../services/settings-service/settings.service';
 import { RoutingService } from "app/services/routing/routing.service";
 import { ModuleComponent } from "app/components/module/module.component";
+import { NetworkService } from 'app/services/network/network.service';
 
 @Component({
   selector: 'app-network-module',
@@ -16,24 +19,27 @@ export class NetworkModuleComponent extends ModuleComponent implements OnInit {
 
   wsMessages$;
 
+  serverAddress: string;
   isSender = false;
   isReceiver = false;
 
   constructor(
     private websocketService: WebsocketService,
+    private settingsService: SettingsService,
+    private networkService: NetworkService,
     routingService: RoutingService
-  ) { 
+  ) {
     super(routingService);
   }
 
   ngOnInit() {
-    this.wsMessages$ = this.websocketService.connect('192.168.178.20:8080'); // Find a way to reconnect to a different address.
+    this.connectToDefaultServer();
 
     this.wsMessages$.subscribe(msg => {
       if (this.isReceiver) {
         console.log('Receiving Message!!');
-        let messageObj = JSON.parse(msg.data);
-        let message = Object.keys(messageObj).map(key => messageObj[key]);
+        const messageObj = JSON.parse(msg.data);
+        const message = Object.keys(messageObj).map(key => messageObj[key]);
         this.toRouteOut(message);
       }
     });
@@ -56,9 +62,22 @@ export class NetworkModuleComponent extends ModuleComponent implements OnInit {
   }
 
   onIncoming(data) {
-    this.toRouteOut(data); //<-- send-thru default? (better: add bypass button to modules)
+    this.toRouteOut(data); // <-- send-thru default? (better: add bypass button to modules)
     if (this.isSender) {
       this.wsMessages$.next(data);
+    }
+  }
+
+  clientChangeServerAddress(address) {
+    this.wsMessages$ = this.websocketService.connect(address);
+  }
+
+  private connectToDefaultServer() {
+    this.serverAddress = this.settingsService.getDefaultServerAddress();
+    if (this.serverAddress) {
+      this.wsMessages$ = this.websocketService.connect(this.serverAddress);
+    } else {
+      this.wsMessages$ = new Subject();
     }
   }
 

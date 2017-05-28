@@ -13,10 +13,11 @@ import 'hammerjs';
 import { NgxElectronModule } from 'ngx-electron';
 
 /* root services */
-import { LocalStorageService } from 'app/services/local-storage/local-storage.service';
+import { SettingsService } from './services/settings-service/settings.service';
 import { MidiConnectionService } from 'app/services/midi-connection/midi-connection.service';
 import { RoutingService } from 'app/services/routing/routing.service';
 import { NetworkService } from 'app/services/network/network.service';
+import { SessionManagerService } from './services/session-manager-service/session-manager.service';
 
 import { AppComponent } from './app.component';
 import { ToolbarComponent } from 'app/components/toolbar/toolbar.component';
@@ -31,6 +32,7 @@ import { InputModuleComponent } from 'app/components/input-module/input-module.c
 import { OutputModuleComponent } from 'app/components/output-module/output-module.component';
 import { ModuleComponent } from 'app/components/module/module.component';
 import { NetworkModuleComponent } from 'app/components/network-module/network-module.component';
+import { SingleControlModuleComponent } from './components/single-control-module/single-control-module.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,8 @@ import { NetworkModuleComponent } from 'app/components/network-module/network-mo
     OutputModuleComponent,
     ModuleComponent,
     NetworkModuleComponent,
-    SideMenuComponent
+    SideMenuComponent,
+    SingleControlModuleComponent
   ],
   imports: [
     BrowserModule,
@@ -58,10 +61,11 @@ import { NetworkModuleComponent } from 'app/components/network-module/network-mo
 
   ],
   providers: [
-    LocalStorageService,
+    SettingsService,
     MidiConnectionService,
     RoutingService,
-    NetworkService
+    NetworkService,
+    SessionManagerService
   ],
   bootstrap: [AppComponent]
 })

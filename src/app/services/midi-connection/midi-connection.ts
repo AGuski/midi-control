@@ -21,7 +21,7 @@ export class MidiConnection implements ConnectionCallbacks {
         const accessOptions = {
           sysex: false, // <-- request sysEx access
           software: false // <-- request software synth access (need to test)
-        }
+        };
 
         navigator.requestMIDIAccess(accessOptions).then((midiAccess: WebMidi.MIDIAccess) => {
           this.midiAccess = midiAccess;
@@ -34,7 +34,7 @@ export class MidiConnection implements ConnectionCallbacks {
           midiAccess.onstatechange = $event => {
             this.mapInputsAndOutputs(midiAccess);
             this.onStateChange($event);
-          }
+          };
 
           resolve(this);
         }, () => {
@@ -51,22 +51,22 @@ export class MidiConnection implements ConnectionCallbacks {
   }
 
   private readInputs(midiAccess: WebMidi.MIDIAccess): void {
-    let inputs = midiAccess.inputs.values();
-    for ( var input = inputs.next(); input && !input.done; input = inputs.next()) {
+    const inputs = midiAccess.inputs.values();
+    for ( let input = inputs.next(); input && !input.done; input = inputs.next()) {
       input.value.onmidimessage = $event => {
         this.onMessage($event);
-      }
+      };
     }
   }
 
   private createOutputs(midiAccess: WebMidi.MIDIAccess): void {
     // can send to all or selective by portID
     this.sendMessage = ({message, portID}) => {
-      let output = portID ? 
+      const output = portID ?
         midiAccess.outputs.get(portID) :
         midiAccess.outputs.values().next().value;
       output.send(message);
-    }
+    };
   }
 
   private mapInputsAndOutputs(midiAccess: WebMidi.MIDIAccess): void {
@@ -81,5 +81,3 @@ export class MidiConnection implements ConnectionCallbacks {
     });
   }
 }
-
-  

@@ -22,11 +22,11 @@ export class MidiPortService {
    * @param mappingName the name of the mapping which will be applied to the connected port
    */
   getPort(portID: string, mappingName?: string): MidiPort {
-    let deviceMapping = undefined;
-    
-    if(mappingName){
+    const deviceMapping = undefined;
+
+    if (mappingName) {
       // load device mapping here
-      //deviceMapping = 
+      // deviceMapping = 
     }
 
     let port = this.midiConnectionService.getPorts().find(

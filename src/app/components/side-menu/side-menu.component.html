@@ -5,12 +5,12 @@
     <md-list>
       <h3 md-subheader>Network Settings</h3>
       <md-list-item>
-        <md-input-container class="">
-          <input mdInput #serverAddressInput maxlength="20" 
-            placeholder="Server Address" 
-            [(ngModel)]="serverAddress" 
-            (change)="clientChangeServerAddress(serverAddress)">
-          <md-hint align="end">{{serverAddressInput.value.length}} / 20</md-hint>
+        <md-input-container>
+          <input mdInput #defaultServerAddressInput maxlength="20" 
+            placeholder="Default server address" 
+            [(ngModel)]="defaultServerAddress" 
+            (change)="clientChangeDefaultServerAddress(defaultServerAddress)">
+          <md-hint align="end">{{defaultServerAddressInput.value.length}} / 20</md-hint>
         </md-input-container>
       </md-list-item>
       <!--<md-divider></md-divider>

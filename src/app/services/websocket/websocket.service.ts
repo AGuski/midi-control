@@ -5,6 +5,7 @@ import { Observable, Observer, Subject } from 'rxjs/Rx';
 export class WebsocketService {
 
   private subject: Subject<MessageEvent>;
+  private ws;
 
   constructor() { }
 
@@ -12,35 +13,42 @@ export class WebsocketService {
   connect(address): Subject<MessageEvent> {
     if (!this.subject) {
       this.subject = this.create(address);
-      console.log(`Successfully connected to websocket server: ${address}`);
+    } else {
+      this.disconnect();
+      this.subject = this.create(address);
     }
+    console.log(`Successfully connected to websocket server: ${address}`);
     return this.subject;
   }
   // create socket
   private create(address) {
 
-    console.log(localStorage.getItem('serverAddress'));
+    this.ws = new WebSocket(`ws://${address}`);
 
-    let ws = new WebSocket(`ws://${address}`);
-    
     // create the observable
-    let observable = Observable.create((obs: Observer<MessageEvent>) => {
-        ws.onmessage = obs.next.bind(obs);
-        ws.onerror = obs.error.bind(obs);
-        ws.onclose = obs.complete.bind(obs);
-        return ws.close.bind(ws);
+    const observable = Observable.create((obs: Observer<MessageEvent>) => {
+        this.ws.onmessage = obs.next.bind(obs);
+        this.ws.onerror = obs.error.bind(obs);
+        this.ws.onclose = obs.complete.bind(obs);
+        return this.ws.close.bind(this.ws);
       }
     );
-    
+
     // create the observer (function to call)
-    let observer = {
+    const observer = {
       next: data => {
-        if (ws.readyState === WebSocket.OPEN) {
-          ws.send(JSON.stringify(data));
+        if (this.ws.readyState === WebSocket.OPEN) {
+          this.ws.send(JSON.stringify(data));
         }
       }
-    }
+    };
 
     return Subject.create(observer, observable);
+  }
+
+  disconnect() {
+    if (this.subject) {
+      this.ws.close();
+    }
   }
 }

@@ -19,6 +19,7 @@ wss.on('connection', function connection(ws) {
   ws.id = connectionCounter++;
   connections[ws.id] = ws;
 
+  console.log(ws.id);
   ws.on('message', function incoming(message) {
     console.log('received: %s', message);
 

@@ -1,0 +1,28 @@
+<md-card fxLayout="column" fxLayoutAlign="start start" >
+  <md-card-subtitle>CC-INPUT</md-card-subtitle>
+  <div fxLayout="row" fxLayoutGap="15px">
+    <md-input-container class="cc-input">
+      <input mdInput placeholder="cc id" [(ngModel)]="parameterId">
+    </md-input-container>
+    <md-slider class="range-input"
+      #controlInput
+      thumbLabel
+      (input)="setValue(controlInput.value)"
+      min="0"
+      max="127"
+      step="1"
+    ></md-slider>
+  </div>
+
+  <app-route-selector
+    [isInput]="true"
+    [selectedRoute]=""
+    (selectedRouteChange)="onRouteInSelection($event)"
+  ></app-route-selector>
+
+  <app-route-selector
+    [isInput]="false"
+    [selectedRoute]=""
+    (selectedRouteChange)="onRouteOutSelection($event)"
+  ></app-route-selector>
+</md-card>

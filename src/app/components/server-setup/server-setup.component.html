@@ -12,12 +12,6 @@
 
   <md-card *ngIf="!networkService.isServer()" >
     <md-card-subtitle>CLIENT SETUP</md-card-subtitle>
-      <md-input-container class="">
-        <input mdInput #serverAddressInput maxlength="20" 
-          placeholder="Server Address" 
-          [(ngModel)]="serverAddress" 
-          (change)="clientChangeServerAddress(serverAddress)">
-        <md-hint align="end">{{serverAddressInput.value.length}} / 20</md-hint>
-      </md-input-container>
+      <span>No server functionality available</span>
   </md-card>
 </div>

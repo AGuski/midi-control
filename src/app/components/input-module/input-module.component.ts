@@ -18,10 +18,10 @@ export class InputModuleComponent implements OnInit {
   @ViewChild('inputIndicator') inputIndicator: MessageIndicatorComponent;
 
   ports: WebMidi.MIDIPort[];
-  mappings = [ 
-    {name: 'Axiom 25', id:'axiom-25'},
-    {name: 'Waldorf Pulse', id:'waldorf-pulse'}
-  ]
+  mappings = [
+    {name: 'Axiom 25', id: 'axiom-25'},
+    {name: 'Waldorf Pulse', id: 'waldorf-pulse'}
+  ];
 
   selectedInput: MidiPort;
 
@@ -72,7 +72,7 @@ export class InputModuleComponent implements OnInit {
   }
 
   selectMapping({value}) {
-    
+
   }
 
   private onPortInput(data: number[]) {
