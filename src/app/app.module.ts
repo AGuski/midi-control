@@ -1,3 +1,4 @@
+import { ModuleService } from './services/module/module.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
@@ -13,11 +14,11 @@ import 'hammerjs';
 import { NgxElectronModule } from 'ngx-electron';
 
 /* root services */
-import { SettingsService } from './services/settings-service/settings.service';
+import { SettingsService } from './services/settings/settings.service';
 import { MidiConnectionService } from 'app/services/midi-connection/midi-connection.service';
 import { RoutingService } from 'app/services/routing/routing.service';
 import { NetworkService } from 'app/services/network/network.service';
-import { SessionManagerService } from './services/session-manager-service/session-manager.service';
+import { SessionService } from './services/session/session.service';
 
 import { AppComponent } from './app.component';
 import { ToolbarComponent } from 'app/components/toolbar/toolbar.component';
@@ -33,6 +34,7 @@ import { OutputModuleComponent } from 'app/components/output-module/output-modul
 import { ModuleComponent } from 'app/components/module/module.component';
 import { NetworkModuleComponent } from 'app/components/network-module/network-module.component';
 import { SingleControlModuleComponent } from './components/single-control-module/single-control-module.component';
+import { ModulesLoaderDirective } from './directives/modules-loader/modules-loader.directive';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,14 @@ import { SingleControlModuleComponent } from './components/single-control-module
     ModuleComponent,
     NetworkModuleComponent,
     SideMenuComponent,
-    SingleControlModuleComponent
+    SingleControlModuleComponent,
+    ModulesLoaderDirective,
+  ],
+  entryComponents: [
+    SingleControlModuleComponent,
+    NetworkModuleComponent,
+    InputModuleComponent,
+    OutputModuleComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +74,8 @@ import { SingleControlModuleComponent } from './components/single-control-module
     MidiConnectionService,
     RoutingService,
     NetworkService,
-    SessionManagerService
+    SessionService,
+    ModuleService
   ],
   bootstrap: [AppComponent]
 })

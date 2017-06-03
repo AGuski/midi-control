@@ -13,6 +13,15 @@
           <md-hint align="end">{{defaultServerAddressInput.value.length}} / 20</md-hint>
         </md-input-container>
       </md-list-item>
+      <div class="debugging-subsection">
+        <h3 md-subheader>Debugging</h3>
+        <md-list-item>
+          <button md-button (click)="debugLogCurrentSession()">Log current session</button>
+        </md-list-item>
+        <md-list-item>
+          <button md-button (click)="debugLogModuleComponents()">Log module components</button>
+        </md-list-item>
+      </div>
       <!--<md-divider></md-divider>
       <h3 md-subheader>Other Settings</h3>
       <md-list-item>

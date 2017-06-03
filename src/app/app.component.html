@@ -11,8 +11,9 @@
         fxLayout="row"
         fxLayoutWrap
       ><div class="area-label"><label class="inputs">INPUTS</label></div>
-        <app-input-module></app-input-module>
-        <app-input-module></app-input-module>
+        <!--<app-input-module></app-input-module>
+        <app-input-module></app-input-module>-->
+        <ng-template appModulesLoader area="input"></ng-template>
       </div>
 
       <div
@@ -21,9 +22,10 @@
         fxLayoutAlign="start start"
         fxLayoutWrap
       ><div class="area-label"><label class="control">CONTROL</label></div>
+        <ng-template appModulesLoader area="control"></ng-template>
+        <!--<app-network-module></app-network-module>
         <app-network-module></app-network-module>
-        <app-network-module></app-network-module>
-        <app-single-control-module></app-single-control-module>
+        <app-single-control-module></app-single-control-module>-->
       </div>
 
       <div
@@ -31,8 +33,9 @@
         fxLayout="row"
         fxLayoutWrap
       ><div class="area-label"><label class="outputs">OUTPUTS</label></div>
-        <app-output-module></app-output-module>
-        <app-output-module></app-output-module>
+        <ng-template appModulesLoader area="output"></ng-template>
+        <!--<app-output-module></app-output-module>
+        <app-output-module></app-output-module>-->
       </div>
     </div>
   </app-side-menu>

@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Subject } from 'rxjs/Rx';
 
 import { WebsocketService } from "app/services/websocket/websocket.service";
-import { SettingsService } from '../../services/settings-service/settings.service';
+import { SettingsService } from '../../services/settings/settings.service';
 import { RoutingService } from "app/services/routing/routing.service";
 import { ModuleComponent } from "app/components/module/module.component";
 import { NetworkService } from 'app/services/network/network.service';
@@ -24,10 +24,10 @@ export class NetworkModuleComponent extends ModuleComponent implements OnInit {
   isReceiver = false;
 
   constructor(
+    routingService: RoutingService,
     private websocketService: WebsocketService,
     private settingsService: SettingsService,
-    private networkService: NetworkService,
-    routingService: RoutingService
+    private networkService: NetworkService
   ) {
     super(routingService);
   }

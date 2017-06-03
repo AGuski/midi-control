@@ -1,8 +1,40 @@
-<md-toolbar fxLayout="row" fxLayoutAlign="end center">
-  <button md-icon-button (click)="toggleSettings()">
-    <md-icon 
-      class="toolbar-icon" 
-      [ngClass]="{'active': openSettings}"
-    >settings</md-icon>
-  </button>
-</md-toolbar>
+<div fxLayout="row">
+  <md-toolbar fxLayout="row" fxLayoutAlign="start center" class="toolbar-left">
+    <!-- session options -->
+    <button md-icon-button (click)="newSession()" mdTooltip="new session">
+      <md-icon 
+        class="toolbar-icon" 
+      >insert_drive_file</md-icon>
+    </button>
+    <button md-icon-button (click)="saveSession()" mdTooltip="save session">
+      <md-icon 
+        class="toolbar-icon" 
+      >save</md-icon>
+    </button>
+    <button md-icon-button (click)="loadSession()" mdTooltip="load session">
+      <md-icon 
+        class="toolbar-icon" 
+      >open_in_browser</md-icon>
+    </button>
+    <!-- adding modules -->
+    <button md-button [mdMenuTriggerFor]="menu">Add module</button>
+    <md-menu #menu="mdMenu">
+      <button 
+        md-menu-item 
+        *ngFor="let module of moduleService.getAvailableModuleTypes()" 
+        (click)="addModule(module)"
+      >{{module}}</button>
+    </md-menu>
+
+
+  </md-toolbar>
+  <md-toolbar fxLayout="row" fxLayoutAlign="end center" class="toolbar-right">
+    <!-- settings button -->
+    <button md-icon-button (click)="toggleSettings()">
+      <md-icon 
+        class="toolbar-icon" 
+        [ngClass]="{'active': openSettings}"
+      >settings</md-icon>
+    </button>
+  </md-toolbar>
+</div>

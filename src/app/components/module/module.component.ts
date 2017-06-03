@@ -13,11 +13,11 @@ export class ModuleComponent implements OnInit {
 
   routeInSubscription;
 
-  routingService;
-
-  constructor(routingService: RoutingService) { this.routingService = routingService; }
+  constructor(protected routingService: RoutingService) { }
 
   ngOnInit() { }
+
+  // Rework modules to not subscribe and change but to operate directly on streams and pass them further
 
   setInputRoute(routeId) {
     if (this.routeInSubscription) {
@@ -34,7 +34,7 @@ export class ModuleComponent implements OnInit {
   }
 
   toRouteOut(message) {
-    if(this.routeOut$) {
+    if (this.routeOut$) {
       this.routeOut$.next(message);
     }
   }

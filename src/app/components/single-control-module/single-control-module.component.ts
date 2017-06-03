@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 
 import { RoutingService } from './../../services/routing/routing.service';
 import { ModuleComponent } from './../module/module.component';
@@ -10,9 +10,13 @@ import { ModuleComponent } from './../module/module.component';
 })
 export class SingleControlModuleComponent extends ModuleComponent implements OnInit {
 
-  parameterId;
+  parameterId: number;
+  inputValue: number;
 
-  constructor( routingService: RoutingService) {
+  constructor(
+    routingService: RoutingService,
+    private cd: ChangeDetectorRef
+  ) {
     super(routingService);
    }
 
@@ -28,8 +32,14 @@ export class SingleControlModuleComponent extends ModuleComponent implements OnI
   }
 
   onIncoming(data) {
-    this.toRouteOut(data); //<-- send-thru default? (better: add bypass button to modules)
+    if (data[0] === 176 && data[1] === this.parameterId) {
+      this.inputValue = data[2];
+      this.cd.detectChanges();
+    }
+    this.toRouteOut(data); // <-- send-thru default? (better: add bypass button to modules)
   }
+
+  // TODO: Fino out how to not skip value when using slider
 
   setValue(value) {
     if (this.parameterId) {

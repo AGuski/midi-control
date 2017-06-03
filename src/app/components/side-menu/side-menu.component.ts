@@ -1,5 +1,7 @@
-import { SettingsService } from './../../services/settings-service/settings.service';
+import { ModuleService } from './../../services/module/module.service';
+import { SettingsService } from './../../services/settings/settings.service';
 import { Component, ViewEncapsulation, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { SessionService } from "app/services/session/session.service";
 
 @Component({
   selector: 'app-side-menu',
@@ -13,7 +15,11 @@ export class SideMenuComponent implements OnInit {
 
   defaultServerAddress: string;
 
-  constructor(private settingsService: SettingsService) { }
+  constructor(
+    private settingsService: SettingsService,
+    private sessionService: SessionService,
+    private moduleService: ModuleService
+  ) { }
 
   ngOnInit() {
     this.defaultServerAddress = this.settingsService.getDefaultServerAddress();
@@ -25,5 +31,13 @@ export class SideMenuComponent implements OnInit {
 
   clientChangeDefaultServerAddress(address) {
     this.settingsService.setDefaultServerAddress(address);
+  }
+
+  debugLogCurrentSession() {
+    console.log(this.sessionService.getCurrentSession());
+  }
+
+  debugLogModuleComponents() {
+    console.log(this.moduleService.getComponentRefs());
   }
 }

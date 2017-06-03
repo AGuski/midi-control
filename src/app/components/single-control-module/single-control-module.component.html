@@ -2,11 +2,12 @@
   <md-card-subtitle>CC-INPUT</md-card-subtitle>
   <div fxLayout="row" fxLayoutGap="15px">
     <md-input-container class="cc-input">
-      <input mdInput placeholder="cc id" [(ngModel)]="parameterId">
+      <input mdInput placeholder="cc id" [(ngModel)]="parameterId" type="number">
     </md-input-container>
     <md-slider class="range-input"
       #controlInput
       thumbLabel
+      [(ngModel)]="inputValue"
       (input)="setValue(controlInput.value)"
       min="0"
       max="127"

@@ -13,7 +13,7 @@ export class SettingsService {
 
   constructor() { }
 
-  setItem(key: string, value:string): void {
+  setItem(key: string, value: string): void {
     window.localStorage.setItem(key, value);
   }
 
