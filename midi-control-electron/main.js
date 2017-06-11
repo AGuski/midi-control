@@ -1,6 +1,9 @@
 const {app, BrowserWindow} = require('electron');
 const path = require('path');
 const url = require('url');
+
+// http server for production
+// const httpServer = require('./http-server.js');
 const wsServer = require('./ws-server.js');
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -11,15 +14,7 @@ function createWindow () {
   // Create the browser window.
   win = new BrowserWindow({width: 1000, height: 600});
 
-  // and load the index.html of the app.
-
-  // win.loadURL(url.format({
-  //   pathname: path.join(__dirname, 'index.html'),
-  //   protocol: 'file:',
-  //   slashes: true
-  // }));
-
-  // and serve from angular webpack for dev
+  // and serve from internal server
 
   win.loadURL('http://localhost:4200');
 

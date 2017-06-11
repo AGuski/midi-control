@@ -4,13 +4,12 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "./node_modules/.bin/electron ./src/electron/ | ng serve --host 0.0.0.0",
+    "start": "ng serve --host 0.0.0.0",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build-electron": "ng build --base-href . && cp src/electron/* dist/",
-    "electron": "npm run build-electron && ./node_modules/.bin/electron ./dist/"
+    "build:electron": "ng build --base-href . && cp -R ./dist/ ./../midi-control-electron/app"
   },
   "private": true,
   "dependencies": {
@@ -38,7 +37,6 @@
     "@types/node": "~6.0.60",
     "@types/webmidi": "^2.0.0",
     "codelyzer": "~2.0.0",
-    "electron": "^1.6.2",
     "jasmine-core": "~2.5.2",
     "jasmine-spec-reporter": "~3.2.0",
     "karma": "~1.4.1",

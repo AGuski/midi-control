@@ -6,7 +6,8 @@ const WebSocket = require('ws');
 const app = express();
 
 const server = http.createServer(app);
-const wss = new WebSocket.Server({ server });
+const wsPort = 8080;
+const wss = new WebSocket.Server({ server, wsPort });
 
 let connections = {};
 let connectionCounter = 0;
@@ -37,6 +38,6 @@ wss.on('connection', function connection(ws) {
   console.log('client '+ws.id+' connected to server');
 });
 
-server.listen(8080, function listening() {
+server.listen(wsPort, function listening() {
   console.log('Listening on %d', server.address().port);
 });
