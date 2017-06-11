@@ -2,6 +2,7 @@
 
 # compiled output
 /app
+/build
 /tmp
 /out-tsc
 
