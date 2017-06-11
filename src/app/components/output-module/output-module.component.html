@@ -17,9 +17,9 @@
     <i class="material-icons indicator-icon">settings_input_svideo</i>
   </app-message-indicator>
 
-  <app-route-selector
-    [isInput]="true"
-    [selectedRoute]=""
-    (selectedRouteChange)="onRouteSelection($event)"
-  ></app-route-selector>
+  <app-route-input
+    [(routeId)]="state.routeInId"
+    (incomingData)="onIncoming($event)"
+  ></app-route-input>
+
 </md-card>

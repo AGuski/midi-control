@@ -3,7 +3,6 @@ import { Subject } from 'rxjs/Rx';
 
 import { WebsocketService } from "app/services/websocket/websocket.service";
 import { SettingsService } from '../../services/settings/settings.service';
-import { RoutingService } from "app/services/routing/routing.service";
 import { ModuleComponent } from "app/components/module/module.component";
 import { NetworkService } from 'app/services/network/network.service';
 
@@ -15,55 +14,49 @@ import { NetworkService } from 'app/services/network/network.service';
 })
 export class NetworkModuleComponent extends ModuleComponent implements OnInit {
 
-  ///// TODO: Try to use Decorators instead of inheriting an abstract component
+  @Input() state: {
+    routeInId: string;
+    routeOutId: string;
+    serverAddress: string;
+    isSender: boolean;
+    isReceiver: boolean;
+  };
 
   wsMessages$;
 
-  serverAddress: string;
-  isSender = false;
-  isReceiver = false;
-
   constructor(
-    routingService: RoutingService,
     private websocketService: WebsocketService,
     private settingsService: SettingsService,
     private networkService: NetworkService
   ) {
-    super(routingService);
+    super();
   }
 
   ngOnInit() {
+    // warum wird das assignment in module service vorher durchgeführt?
     this.connectToDefaultServer();
 
     this.wsMessages$.subscribe(msg => {
-      if (this.isReceiver) {
+      if (this.state.isReceiver) {
         console.log('Receiving Message!!');
         const messageObj = JSON.parse(msg.data);
         const message = Object.keys(messageObj).map(key => messageObj[key]);
-        this.toRouteOut(message);
+        this.toOutgoing(message);
       }
     });
   }
 
-  onRouteInSelection($event) {
-    this.setInputRoute($event);
-  }
-
-  onRouteOutSelection($event) {
-    this.setOutputRoute($event);
-  }
-
   setSender({checked}) {
-    this.isSender = checked;
+    this.state.isSender = checked;
   }
 
   setReceiver({checked}) {
-    this.isReceiver = checked;
+    this.state.isReceiver = checked;
   }
 
   onIncoming(data) {
-    this.toRouteOut(data); // <-- send-thru default? (better: add bypass button to modules)
-    if (this.isSender) {
+    this.toOutgoing(data); // <-- send-thru default? (better: add bypass button to modules)
+    if (this.state.isSender) {
       this.wsMessages$.next(data);
     }
   }
@@ -73,9 +66,11 @@ export class NetworkModuleComponent extends ModuleComponent implements OnInit {
   }
 
   private connectToDefaultServer() {
-    this.serverAddress = this.settingsService.getDefaultServerAddress();
-    if (this.serverAddress) {
-      this.wsMessages$ = this.websocketService.connect(this.serverAddress);
+    if (!this.state.serverAddress) {
+      this.state.serverAddress = this.settingsService.getDefaultServerAddress();
+    }
+    if (this.state.serverAddress) {
+      this.wsMessages$ = this.websocketService.connect(this.state.serverAddress);
     } else {
       this.wsMessages$ = new Subject();
     }

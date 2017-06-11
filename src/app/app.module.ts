@@ -35,6 +35,8 @@ import { ModuleComponent } from 'app/components/module/module.component';
 import { NetworkModuleComponent } from 'app/components/network-module/network-module.component';
 import { SingleControlModuleComponent } from './components/single-control-module/single-control-module.component';
 import { ModulesLoaderDirective } from './directives/modules-loader/modules-loader.directive';
+import { RouteInputComponent } from './components/route-input/route-input.component';
+import { RouteOutputComponent } from './components/route-output/route-output.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,8 @@ import { ModulesLoaderDirective } from './directives/modules-loader/modules-load
     SideMenuComponent,
     SingleControlModuleComponent,
     ModulesLoaderDirective,
+    RouteInputComponent,
+    RouteOutputComponent,
   ],
   entryComponents: [
     SingleControlModuleComponent,

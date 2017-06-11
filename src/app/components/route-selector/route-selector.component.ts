@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { RoutingService } from "app/services/routing/routing.service";
+import { RoutingService } from 'app/services/routing/routing.service';
 
 @Component({
   selector: 'app-route-selector',
@@ -12,12 +12,11 @@ export class RouteSelectorComponent implements OnInit {
   @Input() selectedRoute: string;
   @Output() selectedRouteChange = new EventEmitter<string>();
 
-  @Input() isInput: boolean;
+  @Input() toolTip: string;
 
   routes: string[];
 
   showAvailableRoutes: boolean;
-  toolTip: string;
 
   constructor(private routingService: RoutingService) { }
 
@@ -27,8 +26,6 @@ export class RouteSelectorComponent implements OnInit {
     }
     this.showAvailableRoutes = false;
     this.routes = this.routingService.getAllRouteIds();
-
-    this.toolTip = this.isInput ? 'Input Route' : 'Output Route'
   }
 
   selectRoute(route) {

@@ -5,12 +5,12 @@ interface ConnectionCallbacks {
 
 export class MidiConnection implements ConnectionCallbacks {
 
-    midiAccess: WebMidi.MIDIAccess;
-    inputPorts: WebMidi.MIDIPort[];
-    outputPorts: WebMidi.MIDIPort[];
-    sendMessage: Function;
-    onMessage: Function;
-    onStateChange: Function;
+    private midiAccess: WebMidi.MIDIAccess;
+    public inputPorts: WebMidi.MIDIPort[];
+    public outputPorts: WebMidi.MIDIPort[];
+    public sendMessage: Function;
+    public onMessage: Function;
+    public onStateChange: Function;
 
   constructor() { }
 

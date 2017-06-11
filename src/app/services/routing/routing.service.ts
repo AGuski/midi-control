@@ -11,7 +11,7 @@ export class RoutingService {
   constructor() { }
 
   createRoute(id) {
-    let route = new Route(id);
+    const route = new Route(id);
     this.routes.push(route);
   }
 

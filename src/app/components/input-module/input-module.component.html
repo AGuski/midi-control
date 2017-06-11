@@ -31,11 +31,10 @@
     <md-option>- none -</md-option>
   </md-select>
 
-  <app-route-selector
-    [isInput]="false"
-    [selectedRoute]=""
-    (selectedRouteChange)="onRouteSelection($event)"
-  ></app-route-selector>
+  <app-route-output
+    [(routeId)]="state.routeOutId"
+    [outgoingData$]="outgoing$"
+  ></app-route-output>
 
 
 </md-card>

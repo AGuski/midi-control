@@ -1,29 +1,34 @@
 <md-card fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="15px">
   <md-card-subtitle>NETWORK</md-card-subtitle>
 
+  <app-route-input
+    [(routeId)]="state.routeInId"
+    (incomingData)="onIncoming($event)"
+  ></app-route-input>
+
+
   <!-- server address input if client -->
   <md-input-container>
     <input mdInput #serverAddressInput maxlength="20" 
       placeholder="Server Address" 
-      [(ngModel)]="serverAddress" 
-      (change)="clientChangeServerAddress(serverAddress)">
+      [(ngModel)]="state.serverAddress" 
+      (change)="clientChangeServerAddress(state.serverAddress)">
     <md-hint align="end">{{serverAddressInput.value.length}} / 20</md-hint>
   </md-input-container>
 
   <div fxLayout="row" fxLayoutGap="15px">
-    <md-checkbox (change)="setSender($event)">Send</md-checkbox>
-    <md-checkbox (change)="setReceiver($event)">Receive</md-checkbox>
+    <md-checkbox
+      [(ngModel)]="state.isSender"
+      (change)="setSender($event)"
+    >Send</md-checkbox>
+    <md-checkbox
+      [(ngModel)]="state.isReceiver"
+      (change)="setReceiver($event)"
+    >Receive</md-checkbox>
   </div>
 
-  <app-route-selector
-    [isInput]="true"
-    [selectedRoute]=""
-    (selectedRouteChange)="onRouteInSelection($event)"
-  ></app-route-selector>
-
-  <app-route-selector
-    [isInput]="false"
-    [selectedRoute]=""
-    (selectedRouteChange)="onRouteOutSelection($event)"
-  ></app-route-selector>
+  <app-route-output
+    [(routeId)]="state.routeOutId"
+    [outgoingData$]="outgoing$"
+  ></app-route-output>
 </md-card>

@@ -3,9 +3,9 @@ import { Component, OnInit, Input, ChangeDetectorRef, ViewChild } from '@angular
 import { MidiConnectionService } from 'app/services/midi-connection/midi-connection.service';
 import { MidiPortService } from 'app/services/midi-port/midi-port.service';
 import { MidiPort } from 'app/services/midi-port/midi-port.class';
-import { RoutingService } from 'app/services/routing/routing.service';
 
 import { MessageIndicatorComponent } from 'app/components/message-indicator/message-indicator.component';
+import { ModuleComponent } from "app/components/module/module.component";
 
 @Component({
   selector: 'app-input-module',
@@ -13,7 +13,7 @@ import { MessageIndicatorComponent } from 'app/components/message-indicator/mess
   styleUrls: ['./input-module.component.scss'],
   providers: [MidiPortService]
 })
-export class InputModuleComponent implements OnInit {
+export class InputModuleComponent extends ModuleComponent implements OnInit {
 
   @ViewChild('inputIndicator') inputIndicator: MessageIndicatorComponent;
 
@@ -24,17 +24,16 @@ export class InputModuleComponent implements OnInit {
   ];
 
   selectedInput: MidiPort;
-
+  selectedPortId: string;
   portSubscription;
-
-  routeOut$;
 
   constructor(
     private midiConnectionService: MidiConnectionService,
     private midiPortService: MidiPortService,
-    private routingService: RoutingService,
     private cd: ChangeDetectorRef
-  ) { }
+  ) {
+    super();
+   }
 
   ngOnInit() {
     this.midiConnectionService.ports$
@@ -51,6 +50,7 @@ export class InputModuleComponent implements OnInit {
   // }
 
   selectPort({value}) {
+    console.log(value);
     if (this.portSubscription) {
       this.portSubscription.unsubscribe();
     }
@@ -63,26 +63,12 @@ export class InputModuleComponent implements OnInit {
     }
   }
 
-  onRouteSelection($event) {
-    this.setOutputRoute($event);
-  }
-
-  setOutputRoute(routeOut) {
-    this.routeOut$ = this.routingService.getRoute(routeOut).getSubject();
-  }
-
   selectMapping({value}) {
 
   }
 
   private onPortInput(data: number[]) {
     this.inputIndicator.trigger();
-    this.toRouteOut(data);
-  }
-
-  private toRouteOut(message) {
-    if(this.routeOut$) {
-      this.routeOut$.next(message);
-    }
+    this.toOutgoing(data);
   }
 }

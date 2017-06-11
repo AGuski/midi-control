@@ -41,12 +41,16 @@ export class ModuleService {
     return this.componentRefs;
   }
 
+  getComponentState(id) {
+
+  }
+
   getAvailableModuleTypes(): string[] {
     return Object.keys(this.availableModules)
       .map(key => this.availableModules[key]);
   }
 
-  createModule(type: string ,id: number, state: object): void {
+  createModule(type: string , id: number, state: object): void {
     let componentRef;
     switch (type) {
       case 'INPUT': {
@@ -68,6 +72,8 @@ export class ModuleService {
       default:
       throw(Error(`could not create module of type: ${type}. Missing or misspelled type?`));
     }
+    componentRef.instance.moduleId = id;
+    componentRef.instance.state = state;
     this.componentRefs.push({
       id: id,
       componentRef: componentRef

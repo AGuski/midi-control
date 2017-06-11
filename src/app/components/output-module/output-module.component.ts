@@ -3,9 +3,9 @@ import { Component, OnInit, Input, ChangeDetectorRef, ViewChild } from '@angular
 import { MidiConnectionService } from "app/services/midi-connection/midi-connection.service";
 import { MidiPortService } from "app/services/midi-port/midi-port.service";
 import { MidiPort } from "app/services/midi-port/midi-port.class";
-import { RoutingService } from "app/services/routing/routing.service";
 
 import { MessageIndicatorComponent } from 'app/components/message-indicator/message-indicator.component';
+import { ModuleComponent } from "app/components/module/module.component";
 
 @Component({
   selector: 'app-output-module',
@@ -13,22 +13,20 @@ import { MessageIndicatorComponent } from 'app/components/message-indicator/mess
   styleUrls: ['./output-module.component.scss'],
   providers: [MidiPortService]
 })
-export class OutputModuleComponent implements OnInit {
+export class OutputModuleComponent extends ModuleComponent implements OnInit {
 
   @ViewChild('outputIndicator') outputIndicator: MessageIndicatorComponent;
 
   ports: WebMidi.MIDIPort[];
   selectedOutput: MidiPort;
 
-  routeIn$;
-  routeInSubscription;
-
   constructor(
     private midiConnectionService: MidiConnectionService,
     private midiPortService: MidiPortService,
-    private routingService: RoutingService,
     private cd: ChangeDetectorRef,
-  ) { }
+  ) {
+    super();
+   }
 
   ngOnInit() {
     this.midiConnectionService.ports$
@@ -47,22 +45,8 @@ export class OutputModuleComponent implements OnInit {
     }
   }
 
-  onRouteSelection($event) {
-    this.setInputRoute($event);
-  }
-
-  setInputRoute(routeId) {
-    if (this.routeInSubscription) {
-      this.routeInSubscription.unsubscribe();
-    }
-    this.routeIn$ = this.routingService.getRoute(routeId).getSubject();
-    this.routeInSubscription = this.routeIn$.subscribe(data => {
-      this.onIncoming(data);
-    });
-  }
-
-  private onIncoming(data) {
-    if(this.selectedOutput) {
+  onIncoming(data) {
+    if (this.selectedOutput) {
       this.outputIndicator.trigger();
       console.log(data);
       this.selectedOutput.send(data);

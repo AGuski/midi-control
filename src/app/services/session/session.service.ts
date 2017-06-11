@@ -30,6 +30,7 @@ export class SessionService {
   }
 
   loadSession() {
+    // remove old session components
     this.currentSession = <Session>JSON.parse(window.localStorage.getItem('MC_SESSION'));
     this.currentSession.modules.forEach(module => {
       const componentRef = this.moduleService.createModule(module.type, module.id, module.state || {});

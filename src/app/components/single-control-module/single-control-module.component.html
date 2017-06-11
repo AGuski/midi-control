@@ -1,13 +1,19 @@
 <md-card fxLayout="column" fxLayoutAlign="start start" >
+
+  <app-route-input
+    [(routeId)]="state.routeInId"
+    (incomingData)="onIncoming($event)"
+  ></app-route-input>
+
   <md-card-subtitle>CC-INPUT</md-card-subtitle>
   <div fxLayout="row" fxLayoutGap="15px">
     <md-input-container class="cc-input">
-      <input mdInput placeholder="cc id" [(ngModel)]="parameterId" type="number">
+      <input mdInput placeholder="cc id" [(ngModel)]="state.parameterId" type="number">
     </md-input-container>
     <md-slider class="range-input"
       #controlInput
       thumbLabel
-      [(ngModel)]="inputValue"
+      [(ngModel)]="state.inputValue"
       (input)="setValue(controlInput.value)"
       min="0"
       max="127"
@@ -15,15 +21,8 @@
     ></md-slider>
   </div>
 
-  <app-route-selector
-    [isInput]="true"
-    [selectedRoute]=""
-    (selectedRouteChange)="onRouteInSelection($event)"
-  ></app-route-selector>
-
-  <app-route-selector
-    [isInput]="false"
-    [selectedRoute]=""
-    (selectedRouteChange)="onRouteOutSelection($event)"
-  ></app-route-selector>
+  <app-route-output
+    [(routeId)]="state.routeOutId"
+    [outgoingData$]="outgoing$"
+  ></app-route-output>
 </md-card>

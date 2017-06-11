@@ -64,6 +64,8 @@ export class MidiConnectionService {
           this.emitPorts();
         };
 
+        console.log(this.getPorts());
+
         resolve(this.midiConnection);
       }).catch(error => {
         // alert error here for now, but maybe pass it thru for other uses.
