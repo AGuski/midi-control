@@ -3,6 +3,7 @@
     <md-select
       placeholder="OUTPUT PORT"
       name="port"
+      [(ngModel)]="state.selectedPortId"
       (change)="selectPort($event)"
     >
       <md-option *ngFor="let port of ports"

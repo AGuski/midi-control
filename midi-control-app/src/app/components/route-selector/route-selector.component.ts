@@ -33,5 +33,4 @@ export class RouteSelectorComponent implements OnInit {
     this.selectedRouteChange.emit(this.selectedRoute);
     this.showAvailableRoutes = false;
   }
-
 }

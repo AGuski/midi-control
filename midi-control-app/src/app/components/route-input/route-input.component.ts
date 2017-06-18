@@ -31,5 +31,4 @@ export class RouteInputComponent implements OnChanges {
     });
     this.routeIdChange.emit(id);
   }
-
 }

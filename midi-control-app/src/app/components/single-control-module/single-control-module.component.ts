@@ -16,12 +16,14 @@ export class SingleControlModuleComponent extends ModuleComponent {
     inputValue: number;
   };
 
+  readonly statusbyte = 176 // ControlChange
+
   constructor(private cd: ChangeDetectorRef) {
     super();
   }
 
   onIncoming(data) {
-    if (data[0] === 176 && data[1] === this.state.parameterId) {
+    if (data[0] === this.statusbyte && data[1] === this.state.parameterId) {
       this.state.inputValue = data[2];
       this.cd.detectChanges();
     }
@@ -32,7 +34,7 @@ export class SingleControlModuleComponent extends ModuleComponent {
 
   setValue(value) {
     if (this.state.parameterId) {
-      this.toOutgoing([176, this.state.parameterId, value]);
+      this.toOutgoing([this.statusbyte, this.state.parameterId, value]);
     }
 
   }

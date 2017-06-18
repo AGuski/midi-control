@@ -1,0 +1,20 @@
+<md-card fxLayout="column" fxLayoutAlign="start start" >
+
+  <app-route-input
+    [(routeId)]="state.routeInId"
+    (incomingData)="onIncoming($event)"
+  ></app-route-input>
+
+  <md-card-subtitle>TRANSPOSE NOTES</md-card-subtitle>
+  <div fxLayout="row" fxLayoutGap="15px">
+    <md-input-container class="transpose-input">
+      <input mdInput placeholder="transpose by" [(ngModel)]="state.transposeValue" type="number" min="-12" max="12" step="1">
+    </md-input-container>
+  </div>
+  do not change while playing a note!
+
+  <app-route-output
+    [(routeId)]="state.routeOutId"
+    [outgoingData$]="outgoing$"
+  ></app-route-output>
+</md-card>

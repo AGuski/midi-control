@@ -27,16 +27,17 @@ import { ServerSetupComponent } from 'app/components/server-setup/server-setup.c
 import { StatusBarComponent } from 'app/components/status-bar/status-bar.component';
 import { MessageIndicatorComponent } from 'app/components/message-indicator/message-indicator.component';
 import { RouteSelectorComponent } from 'app/components/route-selector/route-selector.component';
-
-/* editor module components */
-import { InputModuleComponent } from 'app/components/input-module/input-module.component';
-import { OutputModuleComponent } from 'app/components/output-module/output-module.component';
-import { ModuleComponent } from 'app/components/module/module.component';
-import { NetworkModuleComponent } from 'app/components/network-module/network-module.component';
-import { SingleControlModuleComponent } from './components/single-control-module/single-control-module.component';
 import { ModulesLoaderDirective } from './directives/modules-loader/modules-loader.directive';
 import { RouteInputComponent } from './components/route-input/route-input.component';
 import { RouteOutputComponent } from './components/route-output/route-output.component';
+
+/* editor module components */
+import { ModuleComponent } from 'app/components/module/module.component';
+import { InputModuleComponent } from 'app/components/input-module/input-module.component';
+import { OutputModuleComponent } from 'app/components/output-module/output-module.component';
+import { NetworkModuleComponent } from 'app/components/network-module/network-module.component';
+import { SingleControlModuleComponent } from './components/single-control-module/single-control-module.component';
+import { TransposeModuleComponent } from './components/transpose-module/transpose-module.component';
 
 @NgModule({
   declarations: [
@@ -56,12 +57,14 @@ import { RouteOutputComponent } from './components/route-output/route-output.com
     ModulesLoaderDirective,
     RouteInputComponent,
     RouteOutputComponent,
+    TransposeModuleComponent
   ],
   entryComponents: [
     SingleControlModuleComponent,
     NetworkModuleComponent,
     InputModuleComponent,
-    OutputModuleComponent
+    OutputModuleComponent,
+    TransposeModuleComponent
   ],
   imports: [
     BrowserModule,

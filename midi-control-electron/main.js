@@ -3,7 +3,7 @@ const path = require('path');
 const url = require('url');
 
 // http server for production
-const httpServer = require('./http-server.js');
+// const httpServer = require('./http-server.js');
 const wsServer = require('./ws-server.js');
 
 // Keep a global reference of the window object, if you don't, the window will

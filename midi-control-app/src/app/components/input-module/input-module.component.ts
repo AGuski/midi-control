@@ -1,11 +1,12 @@
 import { Component, OnInit, Input, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { Subscription }                                           from 'rxJs';
 
-import { MidiConnectionService } from 'app/services/midi-connection/midi-connection.service';
-import { MidiPortService } from 'app/services/midi-port/midi-port.service';
-import { MidiPort } from 'app/services/midi-port/midi-port.class';
+import { MidiConnectionService }  from 'app/services/midi-connection/midi-connection.service';
+import { MidiPortService }        from 'app/services/midi-port/midi-port.service';
+import { MidiPort }               from 'app/services/midi-port/midi-port.class';
 
-import { MessageIndicatorComponent } from 'app/components/message-indicator/message-indicator.component';
-import { ModuleComponent } from "app/components/module/module.component";
+import { MessageIndicatorComponent }  from 'app/components/message-indicator/message-indicator.component';
+import { ModuleComponent }            from "app/components/module/module.component";
 
 @Component({
   selector: 'app-input-module',
@@ -17,15 +18,20 @@ export class InputModuleComponent extends ModuleComponent implements OnInit {
 
   @ViewChild('inputIndicator') inputIndicator: MessageIndicatorComponent;
 
+  @Input() state: {
+    routeInId: string;
+    routeOutId: string;
+    selectedPortId: string;
+  };
+
   ports: WebMidi.MIDIPort[];
-  mappings = [
-    {name: 'Axiom 25', id: 'axiom-25'},
-    {name: 'Waldorf Pulse', id: 'waldorf-pulse'}
-  ];
+  // mappings = [
+  //   {name: 'Axiom 25', id: 'axiom-25'},
+  //   {name: 'Waldorf Pulse', id: 'waldorf-pulse'}
+  // ];
 
   selectedInput: MidiPort;
-  selectedPortId: string;
-  portSubscription;
+  portSubscription: Subscription;
 
   constructor(
     private midiConnectionService: MidiConnectionService,
@@ -33,13 +39,16 @@ export class InputModuleComponent extends ModuleComponent implements OnInit {
     private cd: ChangeDetectorRef
   ) {
     super();
-   }
+  }
 
   ngOnInit() {
     this.midiConnectionService.ports$
       .pluck('inputPorts')
       .subscribe((ports: WebMidi.MIDIPort[]) => {
         this.ports = ports;
+        if ( this.state.selectedPortId) {
+          this.selectPort({value: this.state.selectedPortId});
+        };
         this.cd.detectChanges();
       });
   }
@@ -50,22 +59,22 @@ export class InputModuleComponent extends ModuleComponent implements OnInit {
   // }
 
   selectPort({value}) {
-    console.log(value);
     if (this.portSubscription) {
       this.portSubscription.unsubscribe();
     }
     if (value) {
       this.selectedInput = this.midiPortService.getPort(value);
-      this.portSubscription = this.selectedInput.subscribe(data => {
-        this.onPortInput(data);
-        this.cd.detectChanges();
-      });
+      if (this.selectedInput) {
+        this.state.selectedPortId = this.selectedInput.id;
+        this.portSubscription = this.selectedInput.subscribe(data => {
+          this.onPortInput(data);
+          this.cd.detectChanges();
+        });
+      }
     }
   }
 
-  selectMapping({value}) {
-
-  }
+  selectMapping({value}) { }
 
   private onPortInput(data: number[]) {
     this.inputIndicator.trigger();

@@ -6,12 +6,13 @@
 
   </div>
   <md-card *ngIf="networkService.isServer()" >
-    <md-card-subtitle>SERVER SETUP</md-card-subtitle>
-    <span>Server Address: {{localIpAddress}}:8080</span>
+    <md-card-subtitle>SERVER INFORMATION</md-card-subtitle>
+    <span>Server Address for multi device: {{localIpAddress}}:4200</span><br>
+    <span>Server Address for websocket: {{localIpAddress}}:8080</span>
   </md-card>
 
   <md-card *ngIf="!networkService.isServer()" >
-    <md-card-subtitle>CLIENT SETUP</md-card-subtitle>
+    <md-card-subtitle>SERVER INFORMATION</md-card-subtitle>
       <span>No server functionality available</span>
   </md-card>
 </div>

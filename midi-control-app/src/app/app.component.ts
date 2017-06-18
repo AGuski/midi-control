@@ -33,8 +33,6 @@ export class AppComponent implements OnInit {
       // this.connectionService.pingDevice();
     });
 
-    console.log(this.sessionService.getCurrentSession());
-
     // Testing Routes
     const routes = [
       '#f44336',

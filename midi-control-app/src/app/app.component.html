@@ -6,40 +6,28 @@
   <app-side-menu #sidemenu class="editor-container">
     <!-- editor content -->
     <div class="editor" fxLayout="column" fxLayoutAlign="space-between center">
-      <div
-        class="input-area"
-        fxLayout="row"
-        fxLayoutWrap
-      ><div class="area-label"><label class="inputs">INPUTS</label></div>
-        <!--<app-input-module></app-input-module>
-        <app-input-module></app-input-module>-->
+      <div class="input-area" fxLayout="row" fxLayoutWrap>
+        <div class="area-label"><label class="inputs">INPUTS</label></div>
+
         <ng-template appModulesLoader area="input"></ng-template>
+
       </div>
 
-      <div
-        class="control-area"
-        fxLayout="row"
-        fxLayoutAlign="start start"
-        fxLayoutWrap
-      ><div class="area-label"><label class="control">CONTROL</label></div>
+      <div class="control-area" fxLayout="row" fxLayoutAlign="start start" fxLayoutWrap>
+        <div class="area-label"><label class="control">CONTROL</label></div>
+
         <ng-template appModulesLoader area="control"></ng-template>
-        <!--<app-network-module></app-network-module>
-        <app-network-module></app-network-module>
-        <app-single-control-module></app-single-control-module>-->
+      
       </div>
 
-      <div
-        class="output-area"
-        fxLayout="row"
-        fxLayoutWrap
-      ><div class="area-label"><label class="outputs">OUTPUTS</label></div>
+      <div class="output-area" fxLayout="row" fxLayoutWrap>
+        <div class="area-label"><label class="outputs">OUTPUTS</label></div>
+
         <ng-template appModulesLoader area="output"></ng-template>
-        <!--<app-output-module></app-output-module>
-        <app-output-module></app-output-module>-->
+
       </div>
     </div>
   </app-side-menu>
 
-  
   <app-status-bar></app-status-bar>
 </div>

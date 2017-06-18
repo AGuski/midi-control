@@ -3,6 +3,7 @@ import { InputModuleComponent } from "app/components/input-module/input-module.c
 import { OutputModuleComponent } from "app/components/output-module/output-module.component";
 import { NetworkModuleComponent } from "app/components/network-module/network-module.component";
 import { SingleControlModuleComponent } from "app/components/single-control-module/single-control-module.component";
+import { TransposeModuleComponent } from 'app/components/transpose-module/transpose-module.component';
 
 @Injectable()
 export class ModuleService {
@@ -11,7 +12,8 @@ export class ModuleService {
     inputModule: 'INPUT',
     outputModule: 'OUTPUT',
     networkModule: 'NETWORK',
-    singleControlModule: 'SINGLE_CONTROL'
+    singleControlModule: 'SINGLE_CONTROL',
+    transposeModule: 'TRANSPOSE'
   };
 
   containers: {
@@ -41,8 +43,9 @@ export class ModuleService {
     return this.componentRefs;
   }
 
-  getComponentState(id) {
-
+  getComponentState(id: number): any {
+    const component = this.componentRefs.find(compRef => compRef.id === id);
+    return component.componentRef.instance.state;
   }
 
   getAvailableModuleTypes(): string[] {
@@ -65,8 +68,12 @@ export class ModuleService {
         componentRef = this.createComponent(NetworkModuleComponent, this.containers.control);
         break;
       }
-        case 'SINGLE_CONTROL': {
+      case 'SINGLE_CONTROL': {
         componentRef = this.createComponent(SingleControlModuleComponent, this.containers.control);
+        break;
+      }
+      case 'TRANSPOSE': {
+        componentRef = this.createComponent(TransposeModuleComponent, this.containers.control);
         break;
       }
       default:

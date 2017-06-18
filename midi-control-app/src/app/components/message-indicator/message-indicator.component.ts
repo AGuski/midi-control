@@ -19,4 +19,3 @@ export class MessageIndicatorComponent {
     }, 100);
   };
 }
-

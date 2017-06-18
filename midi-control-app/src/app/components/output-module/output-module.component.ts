@@ -17,6 +17,12 @@ export class OutputModuleComponent extends ModuleComponent implements OnInit {
 
   @ViewChild('outputIndicator') outputIndicator: MessageIndicatorComponent;
 
+  @Input() state: {
+    routeInId: string;
+    routeOutId: string;
+    selectedPortId: string;
+  };
+
   ports: WebMidi.MIDIPort[];
   selectedOutput: MidiPort;
 
@@ -33,6 +39,9 @@ export class OutputModuleComponent extends ModuleComponent implements OnInit {
       .pluck('outputPorts')
       .subscribe((ports: WebMidi.MIDIPort[]) => {
         this.ports = ports;
+        if ( this.state.selectedPortId) {
+          this.selectPort({value: this.state.selectedPortId});
+        };
         this.cd.detectChanges();
       });
   }
@@ -40,6 +49,9 @@ export class OutputModuleComponent extends ModuleComponent implements OnInit {
   selectPort({value}) {
     if (value) {
       this.selectedOutput = this.midiPortService.getPort(value);
+      if (this.selectedOutput) {
+        this.state.selectedPortId = this.selectedOutput.id;
+      }
     } else {
       this.selectedOutput = undefined;
     }

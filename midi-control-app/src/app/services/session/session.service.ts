@@ -14,7 +14,7 @@ export class SessionService {
     return this.currentSession;
   }
 
-  getCurrentModules() {
+  getCurrentModules(): any[] {
     return this.currentSession.modules;
   }
 
@@ -30,7 +30,7 @@ export class SessionService {
   }
 
   loadSession() {
-    // remove old session components
+    this.createNewSession();
     this.currentSession = <Session>JSON.parse(window.localStorage.getItem('MC_SESSION'));
     this.currentSession.modules.forEach(module => {
       const componentRef = this.moduleService.createModule(module.type, module.id, module.state || {});
@@ -38,6 +38,9 @@ export class SessionService {
   }
 
   storeSession() {
+    this.getCurrentModules().forEach(module => {
+      module.state = this.moduleService.getComponentState(module.id);
+    });
     window.localStorage.setItem('MC_SESSION', JSON.stringify(this.currentSession));
   }
 
@@ -47,9 +50,7 @@ export class SessionService {
     this.currentSession.modules.push({
       id: id,
       type: options.type,
-      state: options.state || {},
-      inputRouteId: options.inputRouteId,
-      outputRouteId: options.outputRouteId
+      state: options.state || {}
     });
   }
 

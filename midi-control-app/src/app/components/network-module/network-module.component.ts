@@ -75,5 +75,4 @@ export class NetworkModuleComponent extends ModuleComponent implements OnInit {
       this.wsMessages$ = new Subject();
     }
   }
-
 }
