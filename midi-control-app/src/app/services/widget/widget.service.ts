@@ -1,19 +1,19 @@
 import { Injectable, ComponentFactoryResolver, Component, Type, ComponentRef } from '@angular/core';
-import { InputModuleComponent } from "app/components/input-module/input-module.component";
-import { OutputModuleComponent } from "app/components/output-module/output-module.component";
-import { NetworkModuleComponent } from "app/components/network-module/network-module.component";
-import { SingleControlModuleComponent } from "app/components/single-control-module/single-control-module.component";
-import { TransposeModuleComponent } from 'app/components/transpose-module/transpose-module.component';
+import { InputWidgetComponent }         from 'app/widget-components/input-widget/input-widget.component';
+import { OutputWidgetComponent }        from 'app/widget-components/output-widget/output-widget.component';
+import { NetworkWidgetComponent }       from 'app/widget-components/network-widget/network-widget.component';
+import { SingleControlWidgetComponent } from 'app/widget-components/single-control-widget/single-control-widget.component';
+import { TransposeWidgetComponent }     from 'app/widget-components/transpose-widget/transpose-widget.component';
 
 @Injectable()
-export class ModuleService {
+export class WidgetService {
 
-  readonly availableModules = {
-    inputModule: 'INPUT',
-    outputModule: 'OUTPUT',
-    networkModule: 'NETWORK',
-    singleControlModule: 'SINGLE_CONTROL',
-    transposeModule: 'TRANSPOSE'
+  readonly availableWidgets = {
+    inputWidget: 'INPUT',
+    outputWidget: 'OUTPUT',
+    networkWidget: 'NETWORK',
+    singleControlWidget: 'SINGLE_CONTROL',
+    transposeWidget: 'TRANSPOSE'
   };
 
   containers: {
@@ -48,38 +48,38 @@ export class ModuleService {
     return component.componentRef.instance.state;
   }
 
-  getAvailableModuleTypes(): string[] {
-    return Object.keys(this.availableModules)
-      .map(key => this.availableModules[key]);
+  getAvailableWidgetTypes(): string[] {
+    return Object.keys(this.availableWidgets)
+      .map(key => this.availableWidgets[key]);
   }
 
-  createModule(type: string , id: number, state: object): void {
+  createWidget(type: string , id: number, state: object): void {
     let componentRef;
     switch (type) {
       case 'INPUT': {
-        componentRef = this.createComponent(InputModuleComponent, this.containers.input);
+        componentRef = this.createComponent(InputWidgetComponent, this.containers.input);
         break;
       }
       case 'OUTPUT': {
-        componentRef = this.createComponent(OutputModuleComponent, this.containers.output);
+        componentRef = this.createComponent(OutputWidgetComponent, this.containers.output);
         break;
       }
       case 'NETWORK': {
-        componentRef = this.createComponent(NetworkModuleComponent, this.containers.control);
+        componentRef = this.createComponent(NetworkWidgetComponent, this.containers.control);
         break;
       }
       case 'SINGLE_CONTROL': {
-        componentRef = this.createComponent(SingleControlModuleComponent, this.containers.control);
+        componentRef = this.createComponent(SingleControlWidgetComponent, this.containers.control);
         break;
       }
       case 'TRANSPOSE': {
-        componentRef = this.createComponent(TransposeModuleComponent, this.containers.control);
+        componentRef = this.createComponent(TransposeWidgetComponent, this.containers.control);
         break;
       }
       default:
-      throw(Error(`could not create module of type: ${type}. Missing or misspelled type?`));
+      throw(Error(`could not create widget of type: ${type}. Missing or misspelled type?`));
     }
-    componentRef.instance.moduleId = id;
+    componentRef.instance.widgetId = id;
     componentRef.instance.state = state;
     this.componentRefs.push({
       id: id,
@@ -87,7 +87,7 @@ export class ModuleService {
     });
   }
 
-  deleteModule(id: number): void {
+  deleteWidget(id: number): void {
     const index = this.componentRefs
       .findIndex(item => item.id === id);
     this.componentRefs[index].componentRef.destroy();

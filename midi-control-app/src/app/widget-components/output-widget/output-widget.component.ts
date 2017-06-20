@@ -4,16 +4,16 @@ import { MidiConnectionService } from "app/services/midi-connection/midi-connect
 import { MidiPortService } from "app/services/midi-port/midi-port.service";
 import { MidiPort } from "app/services/midi-port/midi-port.class";
 
-import { MessageIndicatorComponent } from 'app/components/message-indicator/message-indicator.component';
-import { ModuleComponent } from "app/components/module/module.component";
+import { MessageIndicatorComponent } from 'app/shared/message-indicator/message-indicator.component';
+import { WidgetComponent } from 'app/widget-components/widget/widget.component';
 
 @Component({
-  selector: 'app-output-module',
-  templateUrl: './output-module.component.html',
-  styleUrls: ['./output-module.component.scss'],
+  selector: 'app-output-widget',
+  templateUrl: './output-widget.component.html',
+  styleUrls: ['./output-widget.component.scss'],
   providers: [MidiPortService]
 })
-export class OutputModuleComponent extends ModuleComponent implements OnInit {
+export class OutputWidgetComponent extends WidgetComponent implements OnInit {
 
   @ViewChild('outputIndicator') outputIndicator: MessageIndicatorComponent;
 

@@ -1,13 +1,13 @@
 import { Component, Input, ChangeDetectorRef } from '@angular/core';
 
-import { ModuleComponent } from 'app/components/module/module.component';
+import { WidgetComponent } from 'app/widget-components/widget/widget.component';
 
 @Component({
-  selector: 'app-transpose-module',
-  templateUrl: './transpose-module.component.html',
-  styleUrls: ['./transpose-module.component.scss']
+  selector: 'app-transpose-widget',
+  templateUrl: './transpose-widget.component.html',
+  styleUrls: ['./transpose-widget.component.scss']
 })
-export class TransposeModuleComponent extends ModuleComponent {
+export class TransposeWidgetComponent extends WidgetComponent {
 
     @Input() state: {
     routeInId: string;

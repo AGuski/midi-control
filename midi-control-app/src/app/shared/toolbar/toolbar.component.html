@@ -16,14 +16,14 @@
         class="toolbar-icon" 
       >open_in_browser</md-icon>
     </button>
-    <!-- adding modules -->
-    <button md-button [mdMenuTriggerFor]="menu">Add module</button>
+    <!-- adding widgets -->
+    <button md-button [mdMenuTriggerFor]="menu">Add widget</button>
     <md-menu #menu="mdMenu">
       <button 
         md-menu-item 
-        *ngFor="let module of moduleService.getAvailableModuleTypes()" 
-        (click)="addModule(module)"
-      >{{module}}</button>
+        *ngFor="let widget of widgetService.getAvailableWidgetTypes()" 
+        (click)="addWidget(widget)"
+      >{{widget}}</button>
     </md-menu>
 
 

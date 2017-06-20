@@ -1,6 +1,6 @@
 export class Session {
-  moduleIdCounter = 0;
-  modules: {
+  widgetIdCounter = 0;
+  widgets: {
     id: number;
     type: string;
     state?: {any};

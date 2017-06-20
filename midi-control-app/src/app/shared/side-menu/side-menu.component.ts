@@ -1,4 +1,4 @@
-import { ModuleService } from './../../services/module/module.service';
+import { WidgetService } from './../../services/widget/widget.service';
 import { SettingsService } from './../../services/settings/settings.service';
 import { Component, ViewEncapsulation, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { SessionService } from "app/services/session/session.service";
@@ -18,7 +18,7 @@ export class SideMenuComponent implements OnInit {
   constructor(
     private settingsService: SettingsService,
     private sessionService: SessionService,
-    private moduleService: ModuleService
+    private widgetService: WidgetService
   ) { }
 
   ngOnInit() {
@@ -37,7 +37,7 @@ export class SideMenuComponent implements OnInit {
     console.log(this.sessionService.getCurrentSession());
   }
 
-  debugLogModuleComponents() {
-    console.log(this.moduleService.getComponentRefs());
+  debugLogWidgetComponents() {
+    console.log(this.widgetService.getComponentRefs());
   }
 }

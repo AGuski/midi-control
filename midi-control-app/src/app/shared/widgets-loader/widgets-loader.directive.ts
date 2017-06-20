@@ -1,9 +1,9 @@
 import { Directive, ViewContainerRef, Input } from '@angular/core';
 
 @Directive({
-  selector: '[appModulesLoader]'
+  selector: '[appWidgetsLoader]'
 })
-export class ModulesLoaderDirective {
+export class WidgetsLoaderDirective {
 
   @Input() area: string;
 

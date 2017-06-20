@@ -3,16 +3,16 @@ import { Subject } from 'rxjs/Rx';
 
 import { WebsocketService } from "app/services/websocket/websocket.service";
 import { SettingsService } from '../../services/settings/settings.service';
-import { ModuleComponent } from "app/components/module/module.component";
+import { WidgetComponent } from 'app/widget-components/widget/widget.component';
 import { NetworkService } from 'app/services/network/network.service';
 
 @Component({
-  selector: 'app-network-module',
-  templateUrl: './network-module.component.html',
-  styleUrls: ['./network-module.component.scss'],
+  selector: 'app-network-widget',
+  templateUrl: './network-widget.component.html',
+  styleUrls: ['./network-widget.component.scss'],
   providers: [WebsocketService]
 })
-export class NetworkModuleComponent extends ModuleComponent implements OnInit {
+export class NetworkWidgetComponent extends WidgetComponent implements OnInit {
 
   @Input() state: {
     routeInId: string;
@@ -33,7 +33,7 @@ export class NetworkModuleComponent extends ModuleComponent implements OnInit {
   }
 
   ngOnInit() {
-    // warum wird das assignment in module service vorher durchgeführt?
+    // warum wird das assignment in widget service vorher durchgeführt?
     this.connectToDefaultServer();
 
     this.wsMessages$.subscribe(msg => {
@@ -55,7 +55,7 @@ export class NetworkModuleComponent extends ModuleComponent implements OnInit {
   }
 
   onIncoming(data) {
-    this.toOutgoing(data); // <-- send-thru default? (better: add bypass button to modules)
+    this.toOutgoing(data); // <-- send-thru default? (better: add bypass button to widgets)
     if (this.state.isSender) {
       this.wsMessages$.next(data);
     }

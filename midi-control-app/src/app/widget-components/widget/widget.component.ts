@@ -2,13 +2,13 @@ import { Component, Input } from '@angular/core';
 import { Subject } from "rxjs/Rx";
 
 @Component({
-  selector: 'app-module',
-  templateUrl: './module.component.html',
-  styleUrls: ['./module.component.scss']
+  selector: 'app-widget',
+  templateUrl: './widget.component.html',
+  styleUrls: ['./widget.component.scss']
 })
-export class ModuleComponent {
+export class WidgetComponent {
 
-  @Input() moduleId: number;
+  @Input() widgetId: number;
 
   @Input() state: {
     routeInId: string;
@@ -25,6 +25,6 @@ export class ModuleComponent {
     this.outgoing$.next(data);
   }
 
-  // Rework modules to not subscribe and change but to operate directly on streams and pass them further
+  // Rework widgets to not subscribe and change but to operate directly on streams and pass them further
 
 }

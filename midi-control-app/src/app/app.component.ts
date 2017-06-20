@@ -1,10 +1,11 @@
-import { ModuleService } from './services/module/module.service';
-import { ModulesLoaderDirective } from './directives/modules-loader/modules-loader.directive';
-import { SessionService } from './services/session/session.service';
 import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 
 import { MidiConnectionService } from 'app/services/midi-connection/midi-connection.service';
+import { SessionService } from './services/session/session.service';
+import { WidgetService } from './services/widget/widget.service';
 import { RoutingService } from 'app/services/routing/routing.service';
+
+import { WidgetsLoaderDirective } from './shared/widgets-loader/widgets-loader.directive';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,7 @@ import { RoutingService } from 'app/services/routing/routing.service';
 })
 export class AppComponent implements OnInit {
 
-  @ViewChildren(ModulesLoaderDirective) modulesLoaders: QueryList<ModulesLoaderDirective>;
+  @ViewChildren(WidgetsLoaderDirective) widgetsLoaders: QueryList<WidgetsLoaderDirective>;
 
   areas;
 
@@ -21,7 +22,7 @@ export class AppComponent implements OnInit {
     private connectionService: MidiConnectionService,
     private routingService: RoutingService,
     private sessionService: SessionService,
-    private moduleService: ModuleService
+    private widgetService: WidgetService
   ) { }
 
 
@@ -51,15 +52,15 @@ export class AppComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    this.loadModuleComponents();
+    this.loadWidgetComponents();
   }
 
-  loadModuleComponents() {
+  loadWidgetComponents() {
     if (!this.areas) {
-      this.areas = this.modulesLoaders.toArray();
+      this.areas = this.widgetsLoaders.toArray();
     }
 
-    this.moduleService.assignContainers({
+    this.widgetService.assignContainers({
       input: this.areas[0],
       control: this.areas[1],
       output: this.areas[2]

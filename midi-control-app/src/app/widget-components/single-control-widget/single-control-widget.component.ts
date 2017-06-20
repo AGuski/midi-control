@@ -1,13 +1,13 @@
 import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
 
-import { ModuleComponent } from './../module/module.component';
+import { WidgetComponent } from 'app/widget-components/widget/widget.component';
 
 @Component({
-  selector: 'app-single-control-module',
-  templateUrl: './single-control-module.component.html',
-  styleUrls: ['./single-control-module.component.scss']
+  selector: 'app-single-control-widget',
+  templateUrl: './single-control-widget.component.html',
+  styleUrls: ['./single-control-widget.component.scss']
 })
-export class SingleControlModuleComponent extends ModuleComponent {
+export class SingleControlWidgetComponent extends WidgetComponent {
 
   @Input() state: {
     routeInId: string;

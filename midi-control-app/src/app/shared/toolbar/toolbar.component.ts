@@ -1,4 +1,4 @@
-import { ModuleService } from './../../services/module/module.service';
+import { WidgetService } from './../../services/widget/widget.service';
 import { SessionService } from './../../services/session/session.service';
 import { Component, EventEmitter,Output } from '@angular/core';
 
@@ -15,7 +15,7 @@ export class ToolbarComponent {
 
   constructor(
     private sessionService: SessionService,
-    private moduleService: ModuleService
+    private widgetService: WidgetService
   ) { }
 
   toggleSettings() {
@@ -35,8 +35,8 @@ export class ToolbarComponent {
     this.sessionService.loadSession();
   }
 
-  addModule(moduleType: string) {
-    this.sessionService.addModule({type: moduleType});
+  addWidget(widgetType: string) {
+    this.sessionService.addWidget({type: widgetType});
   }
 
 }

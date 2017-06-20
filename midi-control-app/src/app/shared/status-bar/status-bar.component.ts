@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { MidiConnectionService } from '../../services/midi-connection/midi-connection.service';
-import { MessageIndicatorComponent } from 'app/components/message-indicator/message-indicator.component';
+import { MessageIndicatorComponent } from 'app/shared/message-indicator/message-indicator.component';
 
 /**
  * Status bar
