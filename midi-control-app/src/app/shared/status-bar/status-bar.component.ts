@@ -46,4 +46,8 @@ export class StatusBarComponent implements OnInit {
       this.cd.detectChanges();
     });
   }
+
+  panic() {
+    this.midiConnectionService.sendGlobalNoteOff();
+  }
 }

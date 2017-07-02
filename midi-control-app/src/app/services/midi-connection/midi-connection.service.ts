@@ -81,6 +81,12 @@ export class MidiConnectionService {
     this.outputMessages$.next(message);
   }
 
+  sendGlobalNoteOff(): void {
+    const globalNoteOffMessage = {message: [0xB0, 0x7B, 0]}
+    this.midiConnection.sendMessage(globalNoteOffMessage);
+    this.outputMessages$.next(globalNoteOffMessage);
+  }
+
   /**
    * Returns the underlying MidiConnection
    */

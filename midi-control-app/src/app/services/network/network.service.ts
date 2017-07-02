@@ -11,6 +11,7 @@ export class NetworkService {
     return ElectronService.runningInElectron;
   }
 
+  // deprecated??
   setServerAddress(address: string): void {
     localStorage.setItem('serverAddress', address);
   }
@@ -21,7 +22,6 @@ export class NetworkService {
       let ifaces = os.networkInterfaces();
       let ipAddress = '';
 
-      // COPIED CODE!! REFACTOR AND OPTIMIZE!!!
       Object.keys(ifaces).forEach(ifname => {
         var alias = 0;
 

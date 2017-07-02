@@ -55,7 +55,7 @@ export class AppComponent implements OnInit {
     this.loadWidgetComponents();
   }
 
-  loadWidgetComponents() {
+  private loadWidgetComponents() {
     if (!this.areas) {
       this.areas = this.widgetsLoaders.toArray();
     }

@@ -65,6 +65,7 @@ export class MidiConnection implements ConnectionCallbacks {
       const output = portID ?
         midiAccess.outputs.get(portID) :
         midiAccess.outputs.values().next().value;
+      console.log(message);
       output.send(message);
     };
   }
